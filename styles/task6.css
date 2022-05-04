@@ -1,0 +1,18 @@
+.task_6 {
+    width: 100%;
+}
+
+.task_6_drop {
+    width: 100%;
+    height: 450px;
+    min-width: 600px;
+    border-radius: 12px;
+    box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
+}
+
+.task_6_drag {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
+}
