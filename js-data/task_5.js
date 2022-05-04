@@ -28,6 +28,12 @@
             src: 'Images_1/Eng-2021_2_9_1_21.png',
             caption: 'How many shops are there in the street? ',
             answer: 'four'
+        },
+        {
+            id: 6,
+            src: 'Images_1/1.png',
+            caption: 'Well done!',
+
         }
     ]
 
@@ -47,24 +53,39 @@
         img.classList.add('task5_img')
         let caption = document.createElement('p')
         caption.innerText = item.caption
-        let input = document.createElement('input')
-        input.type = 'text'
-        input.setAttribute('data-answer', `${item.answer}`)
-        input.addEventListener('change', inputCheck)
-        task.append(img, caption, input)
-        if (item.id !== 1) {
-            task.querySelector('input').focus()
+        task.append(img, caption)
+        if (+item.id < items.length) {
+            let form = document.createElement('form')
+            let input = document.createElement('input')
+            input.type = 'text'
+            input.setAttribute('data-answer', `${item.answer}`)
+            input.addEventListener('input', changeColor)
+            let btn = document.createElement('button')
+            btn.innerText = '✔'
+            form.append(input, btn)
+            form.addEventListener('submit', inputCheck)
+            task.append(form)
+            if (item.id !== 1) {
+                task.querySelector('input').focus()
+            }
         }
+
+    }
+
+    function changeColor(e) {
+        e.target.style.border = '2px solid rgb(36, 179, 230)'
     }
 
     function inputCheck(e) {
-        if (e.target.value === e.target.getAttribute('data-answer')) {
+        e.preventDefault()
+        let input = e.target.querySelector('input')
+        if (input.value === input.getAttribute('data-answer')) {
             // task.innerHTML = ''
             slide++
             if (slide < items.length) {
                 renderItem(items[slide])
             } else task.innerText = 'Well done! '
-        }
+        } else input.style.border = '2px solid red';
     }
 
     renderItem(items[0])

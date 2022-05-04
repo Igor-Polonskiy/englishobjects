@@ -26,3 +26,20 @@
     border-radius: 5px;
     border: 2px solid rgb(36, 179, 230);
 }
+
+.task_5 input:focus {
+    outline: none;
+}
+
+.task_5 button {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    border: 2px solid rgb(36, 179, 230);
+    border-radius: 5px;
+}
+
+.task_5 form {
+    display: flex;
+    align-items: center;
+}
