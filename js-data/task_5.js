@@ -52,8 +52,9 @@
         input.setAttribute('data-answer', `${item.answer}`)
         input.addEventListener('change', inputCheck)
         task.append(img, caption, input)
-        task.querySelector('input').focus()
-
+        if (item.id !== 1) {
+            task.querySelector('input').focus()
+        }
     }
 
     function inputCheck(e) {
