@@ -27,6 +27,17 @@
         {
             id: 7,
             src: 'Images_1/sandwich2/sandwich8.png'
+
+        },
+        {
+            id: 8,
+            src: 'Images_1/sandwich2/sandwich9.png'
+
+        },
+        {
+            id: 9,
+            src: 'Images_1/sandwich2/sandwich10.png'
+
         }
     ]
     let task = document.querySelector('.task_7')
