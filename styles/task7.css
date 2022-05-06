@@ -1,14 +1,14 @@
-.task_6 {
+.task_7 {
     width: 100%;
 }
 
-.task_6_slider {
+.task_7_slider {
     display: flex;
     align-items: center;
     position: relative;
 }
 
-.task_6_btn {
+.task_7_btn {
     position: absolute;
     width: 50px;
     height: 50px;
@@ -21,15 +21,15 @@
     z-index: 10;
 }
 
-.task_6_btn_prev {
+.task_7_btn_prev {
     left: -25px;
 }
 
-.task_6_btn_next {
+.task_7_btn_next {
     right: -25px;
 }
 
-.task_6_drop {
+.task_7_drop {
     width: 100%;
     height: 450px;
     min-width: 600px;
@@ -40,7 +40,7 @@
     background-position: center;
 }
 
-.task_6_drag_wrapper {
+.task_7_drag_wrapper {
     width: 100%;
     height: 200px;
     border-radius: 12px;
@@ -49,15 +49,15 @@
     padding: 0 20px;
 }
 
-.task_6_drag {
+.task_7_drag {
     width: fit-content;
     display: flex;
     position: relative;
     transition: all 0.3s;
 }
 
-.task_6_pic,
-.task_6_pic_dropped {
+.task_7_pic,
+.task_7_pic_dropped {
     height: 200px;
     width: 200px;
     background-size: contain;
