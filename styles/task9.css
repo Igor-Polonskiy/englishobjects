@@ -1,11 +1,11 @@
 .task_9 {
-    width: 620px;
+    width: 770px;
 }
 
 .task_9_dropzone {
     margin: auto;
     display: flex;
-    max-width: 620px;
+    max-width: 770px;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
@@ -14,8 +14,8 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    width: 150px;
-    height: 150px;
+    width: 185px;
+    height: 185px;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -26,26 +26,28 @@
 
 .task_9_dragzone {
     display: flex;
+    justify-content: center;
     width: 100%;
     flex-wrap: wrap;
     border-radius: 12px;
     box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
     padding: 10px;
-    height: 100px;
+    height: 120px;
 }
 
 .task_9_dragitem {
     display: flex;
     align-items: center;
-    cursor: pointer;
+    cursor: grab;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
     padding: 5px;
     margin: 3px;
-    max-width: 140px;
+    max-width: 180px;
     text-align: center;
     height: 2em;
+    font-size: 22px;
 }
 
 .task_9_right {
@@ -54,4 +56,21 @@
 
 .task_9_wrong {
     border: 2px solid red
+}
+
+@media(max-width: 1250px) {
+    .task_9 {
+        width: 620px;
+    }
+    .task_9_dropzone {
+        width: 620px;
+    }
+    .task_9_drop {
+        width: 150px;
+        height: 150px;
+    }
+    .task_9_dragitem {
+        max-width: 140px;
+        font-size: 18px;
+    }
 }

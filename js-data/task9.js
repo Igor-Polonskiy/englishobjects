@@ -9,8 +9,7 @@
     const drop = headCheck.querySelector('.drop');
     const check_your = headCheck.querySelector('.check_your');
     const result = headCheck.querySelector('.result');
-    const wordPazzle_dropWrapper = document.querySelector('.task4_imgWrapper');
-    const wordPazzle_letters = document.querySelector('.task4_answers');
+
     let startAction = false;
     let dropitems
 
@@ -75,7 +74,7 @@
         }
     ]
 
-    let drops
+
 
     insertPictures(pictures)
     insertWords(words)
@@ -223,7 +222,7 @@
             startAction = true;
             checkButton_classList_changer();
             if (clickWithoutMove) {
-                changeStylesAndAppend(dragzone, draggingItem);
+                //changeStylesAndAppend(dragzone, draggingItem);
             }
             document.removeEventListener('pointermove', onMouseMove);
 
@@ -291,6 +290,7 @@
         } else {
             feedBackChanger('lose');
         }
+        draggingItem = null
         task.removeEventListener('pointerdown', draggingListner);
     }
 
