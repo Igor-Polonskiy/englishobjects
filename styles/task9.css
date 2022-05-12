@@ -1,0 +1,57 @@
+.task_9 {
+    width: 620px;
+}
+
+.task_9_dropzone {
+    margin: auto;
+    display: flex;
+    max-width: 620px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.task_9_drop {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 10px 2px;
+    border-radius: 12px;
+    box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
+}
+
+.task_9_dragzone {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    border-radius: 12px;
+    box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
+    padding: 10px;
+    height: 100px;
+}
+
+.task_9_dragitem {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
+    padding: 5px;
+    margin: 3px;
+    max-width: 140px;
+    text-align: center;
+    height: 2em;
+}
+
+.task_9_right {
+    border: 2px solid green
+}
+
+.task_9_wrong {
+    border: 2px solid red
+}

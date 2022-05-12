@@ -1,0 +1,44 @@
+.task_8 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.task_8_pic {
+    box-sizing: border-box;
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 180px;
+    border: 1px solid grey;
+    margin: 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #e9ecf4;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    padding: 5px;
+}
+
+.task_8_pic:hover {
+    box-shadow: -5px -5px 15px #b8b7b7, 5px 5px 15px #99999b;
+}
+
+.task_8_pic_active {
+    border: 5px solid blue
+}
+
+.task_8_green {
+    border: 5px solid green;
+}
+
+.task_8_red {
+    border: 5px solid red;
+}
