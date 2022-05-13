@@ -220,11 +220,13 @@
 
         // КОГДА ВО ВРЕМЯ ПЕРЕТАСКИВАНИЯ КУРСОР ВЫНЕСЛИ ЗА ПРЕДЕЛЫ ОКНА БРАУЗЕРА И ОТПУСТИЛИ ЗАХВАТ ЭЛЕМЕНТА
         function moveOut(e) {
-            draggingItem.remove()
+            const elemUnderPount = document.elementFromPoint(e.clientX, e.clientY);
+            if (elemUnderPount !== draggingItem) {
+                draggingItem.remove();
+            }
             window.removeEventListener('pointerup', moveOut);
             document.removeEventListener('pointermove', onMouseMove);
         }
-
         // КОГДА КУРСОР В ЗОНЕ ДЛЯ ПЕРЕТАСКИВАНИЙ И ПОЛЬЗОВАТЕЛЬ ОТПУСТИЛ ЗАХВАТ ЭЛЕМЕНТА
         draggingItem.onpointerup = function() {
             draggingItem.style.cursor = 'grab';

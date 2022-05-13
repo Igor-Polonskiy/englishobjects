@@ -76,7 +76,11 @@
             btn.style.backgroundImage = `url(Images_1/soundToPic/sound.png)`
             audio.append(btn)
             audio.addEventListener('click', (e) => {
+                audios[item.id - 1].addEventListener('ended', (event) => {
+                    e.target.classList.remove('task_10_active')
+                })
                 audios[item.id - 1].play()
+                e.target.classList.add('task_10_active')
             })
             dragzone.append(audio)
         })
@@ -187,8 +191,16 @@
 
 
         // КОГДА ВО ВРЕМЯ ПЕРЕТАСКИВАНИЯ КУРСОР ВЫНЕСЛИ ЗА ПРЕДЕЛЫ ОКНА БРАУЗЕРА И ОТПУСТИЛИ ЗАХВАТ ЭЛЕМЕНТА
-        function moveOut(e) {
+        /*function moveOut(e) {
             changeStylesAndAppend(dragzone, draggingItem);
+            window.removeEventListener('pointerup', moveOut);
+            document.removeEventListener('pointermove', onMouseMove);
+        }*/
+        function moveOut(e) {
+            const elemUnderPount = document.elementFromPoint(e.clientX, e.clientY);
+            if (elemUnderPount !== draggingItem) {
+                changeStylesAndAppend(dragzone, draggingItem);
+            }
             window.removeEventListener('pointerup', moveOut);
             document.removeEventListener('pointermove', onMouseMove);
         }

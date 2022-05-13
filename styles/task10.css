@@ -58,6 +58,16 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+    transition: all 0.3s;
+}
+
+.task_10_dragitem button:hover {
+    transform: rotate(-45deg);
+    transition: all 0.3s;
+}
+
+.task_10_active {
+    border: 2px solid rgb(53, 168, 244)
 }
 
 .task_10_right {

@@ -186,8 +186,16 @@
 
 
         // КОГДА ВО ВРЕМЯ ПЕРЕТАСКИВАНИЯ КУРСОР ВЫНЕСЛИ ЗА ПРЕДЕЛЫ ОКНА БРАУЗЕРА И ОТПУСТИЛИ ЗАХВАТ ЭЛЕМЕНТА
+        /* function moveOut(e) {
+             changeStylesAndAppend(dragzone, draggingItem);
+             window.removeEventListener('pointerup', moveOut);
+             document.removeEventListener('pointermove', onMouseMove);
+         }*/
         function moveOut(e) {
-            changeStylesAndAppend(dragzone, draggingItem);
+            const elemUnderPount = document.elementFromPoint(e.clientX, e.clientY);
+            if (elemUnderPount !== draggingItem) {
+                changeStylesAndAppend(dragzone, draggingItem);
+            }
             window.removeEventListener('pointerup', moveOut);
             document.removeEventListener('pointermove', onMouseMove);
         }
