@@ -1,10 +1,11 @@
 (() => {
 
-    const task = document.querySelector('.task_9')
-    const dropzone = task.querySelector('.task_9_dropzone')
-    const dragzone = task.querySelector('.task_9_dragzone')
+    const task = document.querySelector('.task_10')
+    const dropzone = task.querySelector('.task_10_dropzone')
+    const dragzone = task.querySelector('.task_10_dragzone')
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
+    const audios = task.querySelectorAll('.task_10_audio')
 
     const drop = headCheck.querySelector('.drop');
     const check_your = headCheck.querySelector('.check_your');
@@ -16,44 +17,39 @@
 
     const pictures = [{
             id: 1,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_25.png',
-            text: 'I am Alex'
+            data: 'Images_1/soundToPic/Eng-2021_2_1_1_19.png',
+
         },
         {
             id: 2,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_26.png',
-            text: 'You are Kate'
+            data: 'Images_1/soundToPic/Eng-2021_2_1_1_20.png',
+
         },
         {
             id: 3,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_27.png',
-            text: 'He is Nick'
+            data: 'Images_1/soundToPic/Eng-2021_2_1_1_21.png',
+
         },
         {
             id: 4,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_28.png',
-            text: 'She is Lara'
+            data: 'Images_1/soundToPic/Eng-2021_2_1_1_22.png',
+
         },
         {
             id: 5,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_29.png',
-            text: 'It is Coco'
+            data: 'Images_1/soundToPic/Eng-2021_2_1_1_23.png',
+
         },
         {
             id: 6,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_30.png',
-            text: 'They are Kiwi and Coco'
-        },
-        {
-            id: 7,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_31.png',
-            text: 'We are Alex and Nick'
+            data: 'Images_1/soundToPic/Eng-2021_2_1_1_24.png',
+
         }
     ]
 
 
     insertPictures(pictures)
-    insertWords(pictures)
+    insertAudio(pictures)
 
     function shuffleArr(arr) {
         return arr.sort(() => Math.random() - 0.5)
@@ -62,22 +58,27 @@
     function insertPictures(arr) {
         shuffleArr(arr).forEach(item => {
             let picture = document.createElement('div')
-            picture.classList.add('task_9_drop')
+            picture.classList.add('task_10_drop')
             picture.style.backgroundImage = `url(${item.data})`
             picture.setAttribute('data-id', item.id)
             dropzone.append(picture)
         })
-        dropitems = task.querySelectorAll('.task_9_drop')
+        dropitems = task.querySelectorAll('.task_10_drop')
 
     }
 
-    function insertWords(arr) {
+    function insertAudio(arr) {
         shuffleArr(arr).forEach(item => {
-            let word = document.createElement('div')
-            word.classList.add('task_9_dragitem')
-            word.innerText = item.text
-            word.setAttribute('data-id', item.id)
-            dragzone.append(word)
+            let audio = document.createElement('div')
+            audio.classList.add('task_10_dragitem')
+            audio.setAttribute('data-id', item.id)
+            let btn = document.createElement('button')
+            btn.style.backgroundImage = `url(Images_1/soundToPic/sound.png)`
+            audio.append(btn)
+            audio.addEventListener('click', (e) => {
+                audios[item.id - 1].play()
+            })
+            dragzone.append(audio)
         })
     }
 
@@ -89,7 +90,7 @@
     task.addEventListener('pointerdown', draggingListner);
 
     function draggingListner(e) {
-        if (e.target.classList.contains('task_9_dragitem')) {
+        if (e.target.classList.contains('task_10_dragitem')) {
             mouseDown(e)
         }
     }
@@ -203,12 +204,14 @@
             document.removeEventListener('pointermove', onMouseMove);
 
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
-            if (elemBelow.classList.contains('task_9_drop') && elemBelow.children.length === 0) {
+            if (elemBelow.classList.contains('task_10_drop') && elemBelow.children.length === 0) {
                 changeStylesAndAppend(elemBelow, draggingItem);
             } else {
                 changeStylesAndAppend(dragzone, draggingItem);
             }
+            draggingItem = null
         };
+
 
         function changeStylesAndAppend(dropPlace, draggingElem) {
             draggingElem.style.position = 'relative ';
@@ -241,8 +244,8 @@
 
         dropitems.forEach(item => {
             if (item.children.length) {
-                [...item.children][0].classList.remove('task_9_right');
-                [...item.children][0].classList.remove('task_9_wrong');
+                [...item.children][0].classList.remove('task_10_right');
+                [...item.children][0].classList.remove('task_10_wrong');
                 dragzone.append([...item.children][0])
 
             }
@@ -256,8 +259,8 @@
             if (item.children.length) {
                 if ([...item.children][0].getAttribute('data-id') === item.getAttribute('data-id')) {
                     winVar++;
-                    [...item.children][0].classList.add('task_9_right')
-                } else [...item.children][0].classList.add('task_9_wrong')
+                    [...item.children][0].classList.add('task_10_right')
+                } else [...item.children][0].classList.add('task_10_wrong')
             }
         })
 
