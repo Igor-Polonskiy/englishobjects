@@ -1,3 +1,27 @@
+.dialog {
+    position: relative;
+}
+
+.dialog_blure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+}
+
+.dialog_start {
+    cursor: pointer;
+    background: #fff;
+    padding: 10px;
+    border-radius: 12px;
+}
+
 .dialog_wrapper {
     display: flex;
     justify-content: center;
@@ -7,20 +31,38 @@
     width: 200px;
 }
 
+.dialog_text_wrapper {
+    overflow: hidden;
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+    box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
+}
+
 .dialog_text {
+    padding-bottom: 40px;
+    position: absolute;
+    bottom: 0;
     width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .dialog_Parrot {
+    position: relative;
+    left: -300px;
     width: 200px;
     height: 50px;
     border-radius: 12px;
     /* align-self: flex-end; */
-    margin: 35px;
+    margin: 35px 0;
     background-color: white;
     box-shadow: 0 6px 5px -2px rgb(162, 162, 162);
     border-bottom: 1px solid #666;
-    position: relative;
+    transition: left 0.3s;
 }
 
 .dialog_Parrot p,
@@ -59,11 +101,13 @@
     height: 50px;
     border-radius: 12px;
     /* align-self: flex-start; */
-    margin: 40px;
+    margin: 0 0 0 50px;
     background-color: white;
     box-shadow: 0 6px 5px -2px rgb(162, 162, 162);
     border-bottom: 1px solid #666;
     position: relative;
+    right: -300px;
+    transition: right 0.3s;
 }
 
 .dialog_User:before {
@@ -90,4 +134,24 @@
     top: 49px;
     border: 15px solid;
     border-color: #fff transparent transparent #fff;
+}
+
+.dialog_answers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
+}
+
+.dialog_answer {
+    font-size: 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 6px 5px -2px rgb(162, 162, 162);
+    border-bottom: 1px solid #666;
 }
