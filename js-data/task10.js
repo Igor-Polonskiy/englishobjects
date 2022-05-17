@@ -17,32 +17,32 @@
 
     const pictures = [{
             id: 1,
-            data: 'Images_1/soundToPic/Eng-2021_2_1_1_19.png',
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_19.png',
 
         },
         {
             id: 2,
-            data: 'Images_1/soundToPic/Eng-2021_2_1_1_20.png',
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_20.png',
 
         },
         {
             id: 3,
-            data: 'Images_1/soundToPic/Eng-2021_2_1_1_21.png',
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_21.png',
 
         },
         {
             id: 4,
-            data: 'Images_1/soundToPic/Eng-2021_2_1_1_22.png',
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_22.png',
 
         },
         {
             id: 5,
-            data: 'Images_1/soundToPic/Eng-2021_2_1_1_23.png',
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_23.png',
 
         },
         {
             id: 6,
-            data: 'Images_1/soundToPic/Eng-2021_2_1_1_24.png',
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_24.png',
 
         }
     ]
@@ -73,7 +73,7 @@
             audio.classList.add('task_10_dragitem')
             audio.setAttribute('data-id', item.id)
             let btn = document.createElement('button')
-            btn.style.backgroundImage = `url(Images_1/soundToPic/sound.png)`
+            btn.style.backgroundImage = `url(Images_18/soundToPic/sound.png)`
             audio.append(btn)
             audio.addEventListener('click', (e) => {
                 audios[item.id - 1].addEventListener('ended', (event) => {

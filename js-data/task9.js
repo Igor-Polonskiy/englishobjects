@@ -16,37 +16,37 @@
 
     const pictures = [{
             id: 1,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_25.png',
+            data: 'Images_18/wordsToPic/Eng-2021_2_1_1_25.png',
             text: 'I am Alex'
         },
         {
             id: 2,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_26.png',
+            data: 'Images_18/wordsToPic/Eng-2021_2_1_1_26.png',
             text: 'You are Kate'
         },
         {
             id: 3,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_27.png',
+            data: 'Images_18/wordsToPic/Eng-2021_2_1_1_27.png',
             text: 'He is Nick'
         },
         {
             id: 4,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_28.png',
+            data: 'Images_18/wordsToPic/Eng-2021_2_1_1_28.png',
             text: 'She is Lara'
         },
         {
             id: 5,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_29.png',
+            data: 'Images_18/wordsToPic/Eng-2021_2_1_1_29.png',
             text: 'It is Coco'
         },
         {
             id: 6,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_30.png',
+            data: 'Images_18/wordsToPic/Eng-2021_2_1_1_30.png',
             text: 'They are Kiwi and Coco'
         },
         {
             id: 7,
-            data: 'Images_1/wordsToPic/Eng-2021_2_1_1_31.png',
+            data: 'Images_18/wordsToPic/Eng-2021_2_1_1_31.png',
             text: 'We are Alex and Nick'
         }
     ]

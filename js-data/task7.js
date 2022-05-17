@@ -1,49 +1,49 @@
 (() => {
     let pictures = [{
             id: 1,
-            src: 'Images_1/sandwich2/sandwich2.png',
+            src: 'Images_18/sandwich2/sandwich2.png',
 
         },
         {
             id: 2,
-            src: 'Images_1/sandwich2/sandwich3.png'
+            src: 'Images_18/sandwich2/sandwich3.png'
         },
         {
             id: 3,
-            src: 'Images_1/sandwich2/sandwich4.png'
+            src: 'Images_18/sandwich2/sandwich4.png'
         },
         {
             id: 4,
-            src: 'Images_1/sandwich2/sandwich5.png'
+            src: 'Images_18/sandwich2/sandwich5.png'
         },
         {
             id: 5,
-            src: 'Images_1/sandwich2/sandwich6.png'
+            src: 'Images_18/sandwich2/sandwich6.png'
         },
         {
             id: 6,
-            src: 'Images_1/sandwich2/sandwich7.png'
+            src: 'Images_18/sandwich2/sandwich7.png'
         },
         {
             id: 7,
-            src: 'Images_1/sandwich2/sandwich8.png'
+            src: 'Images_18/sandwich2/sandwich8.png'
 
         },
         {
             id: 8,
-            src: 'Images_1/sandwich2/sandwich9.png'
+            src: 'Images_18/sandwich2/sandwich9.png'
 
         },
         {
             id: 9,
-            src: 'Images_1/sandwich2/sandwich10.png'
+            src: 'Images_18/sandwich2/sandwich10.png'
 
         }
     ]
     let task = document.querySelector('.task_7')
     let dragField = task.querySelector('.task_7_drag')
     let dropField = task.querySelector('.task_7_drop')
-    dropField.style.backgroundImage = `url('Images_1/sandwich2/sandwich1.png')`
+    dropField.style.backgroundImage = `url('Images_18/sandwich2/sandwich1.png')`
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
     let prev = task.querySelector('.task_7_btn_prev')
@@ -293,13 +293,14 @@
         audio.play()
 
         dropField.append(win)
-
+        startAction = false
+        checkButton_classList_changer();
     }
 
     function resetPuzzle() {
         startAction = false;
         checkButton_classList_changer();
-        feedBackChanger('reset')
+
         dropField.innerHTML = ''
 
     }

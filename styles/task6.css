@@ -47,12 +47,13 @@
     box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
     overflow: hidden;
     padding: 0 20px;
+    position: relative;
 }
 
 .task_6_drag {
     width: fit-content;
     display: flex;
-    position: relative;
+    position: absolute;
     transition: all 0.3s;
 }
 
@@ -64,4 +65,10 @@
     background-repeat: no-repeat;
     background-position: center;
     cursor: grab;
+}
+
+@media(max-width: 1556px) {
+    .task_6 {
+        max-width: 900px;
+    }
 }

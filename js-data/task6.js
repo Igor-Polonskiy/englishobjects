@@ -1,54 +1,54 @@
 (() => {
     let pictures = [{
             id: 1,
-            src: 'Images_1/sandwich/sandwich2.png',
+            src: 'Images_18/sandwich/sandwich2.png',
 
         },
         {
             id: 2,
-            src: 'Images_1/sandwich/sandwich3.png'
+            src: 'Images_18/sandwich/sandwich3.png'
         },
         {
             id: 3,
-            src: 'Images_1/sandwich/sandwich4.png'
+            src: 'Images_18/sandwich/sandwich4.png'
         },
         {
             id: 4,
-            src: 'Images_1/sandwich/sandwich5.png'
+            src: 'Images_18/sandwich/sandwich5.png'
         },
         {
             id: 5,
-            src: 'Images_1/sandwich/sandwich6.png'
+            src: 'Images_18/sandwich/sandwich6.png'
         },
         {
             id: 6,
-            src: 'Images_1/sandwich/sandwich7.png'
+            src: 'Images_18/sandwich/sandwich7.png'
         },
         {
             id: 7,
-            src: 'Images_1/sandwich/sandwich8.png'
+            src: 'Images_18/sandwich/sandwich8.png'
         },
         {
             id: 8,
-            src: 'Images_1/sandwich/sandwich9.png'
+            src: 'Images_18/sandwich/sandwich9.png'
         },
         {
             id: 9,
-            src: 'Images_1/sandwich/sandwich10.png'
+            src: 'Images_18/sandwich/sandwich10.png'
         },
         {
             id: 10,
-            src: 'Images_1/sandwich/sandwich11.png'
+            src: 'Images_18/sandwich/sandwich11.png'
         },
         {
             id: 11,
-            src: 'Images_1/sandwich/sandwich12.png'
+            src: 'Images_18/sandwich/sandwich12.png'
         },
     ]
     let task = document.querySelector('.task_6')
     let dragField = task.querySelector('.task_6_drag')
     let dropField = task.querySelector('.task_6_drop')
-    dropField.style.backgroundImage = `url('Images_1/sandwich/sandwich1.png')`
+    dropField.style.backgroundImage = `url('Images_18/sandwich/sandwich1.png')`
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
     let prev = task.querySelector('.task_6_btn_prev')
@@ -298,7 +298,6 @@
     function resetPuzzle() {
         startAction = false;
         checkButton_classList_changer();
-        feedBackChanger('reset')
         dropField.innerHTML = ''
 
     }

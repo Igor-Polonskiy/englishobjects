@@ -19,19 +19,19 @@
 
     const answers = [{
             id: 1,
-            data: 'Images_1/task_1.png'
+            data: 'Images_18/task_1.png'
         },
         {
             id: 2,
-            data: 'Images_1/task_2.png'
+            data: 'Images_18/task_2.png'
         },
         {
             id: 3,
-            data: 'Images_1/task_3.png'
+            data: 'Images_18/task_3.png'
         },
         {
             id: 4,
-            data: 'Images_1/task_4.png'
+            data: 'Images_18/task_4.png'
         }
     ]
 

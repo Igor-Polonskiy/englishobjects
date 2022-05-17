@@ -1,0 +1,41 @@
+.drop {
+    width: 10%;
+    background: url(../Images_18/puzzles_img/1.png) no-repeat;
+    cursor: pointer;
+}
+
+
+/* .save {
+  width: 10%;
+  background: url(../Images_18/puzzles_img/) no-repeat;
+  cursor: pointer;
+  display: none !important;
+} */
+
+.check_your {
+    width: 10%;
+    background: url(../Images_18/puzzles_img/6.png) no-repeat;
+    cursor: pointer;
+}
+
+.check_your_active {
+    background: url(../Images_18/puzzles_img/5.png) no-repeat;
+}
+
+.result {
+    width: 40%;
+    width: 15em;
+    float: right;
+}
+
+.result_lose {
+    background: url(../Images_18/puzzles_img/7.png) 0em 0em / 100% no-repeat;
+    width: 40%;
+    border-radius: 10px;
+}
+
+.result_win {
+    background: url(../Images_18/puzzles_img/8.png) 0em 0em / 100% no-repeat;
+    width: 30%;
+    border-radius: 10px;
+}

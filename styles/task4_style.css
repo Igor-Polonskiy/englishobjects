@@ -74,3 +74,10 @@
 .task4_chek_answer {
     font-size: 26px;
 }
+
+@media(max-width:1250px) {
+    .task4_answer {
+        width: 140px;
+        height: 120px;
+    }
+}

@@ -2,15 +2,15 @@
 
     let pictures = [{
             id: 1,
-            src: 'Images_1/singleChoice/Eng-2021_2_1_3_21.png'
+            src: 'Images_18/singleChoice/Eng-2021_2_1_3_21.png'
         },
         {
             id: 2,
-            src: 'Images_1/singleChoice/Eng-2021_2_1_3_22.png'
+            src: 'Images_18/singleChoice/Eng-2021_2_1_3_22.png'
         },
         {
             id: 3,
-            src: 'Images_1/singleChoice/Eng-2021_2_1_3_23.png'
+            src: 'Images_18/singleChoice/Eng-2021_2_1_3_23.png'
         }
     ]
 

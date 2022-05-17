@@ -1,0 +1,93 @@
+.dialog_wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.dialog_parrot img {
+    width: 200px;
+}
+
+.dialog_text {
+    width: 400px;
+}
+
+.dialog_Parrot {
+    width: 200px;
+    height: 50px;
+    border-radius: 12px;
+    /* align-self: flex-end; */
+    margin: 35px;
+    background-color: white;
+    box-shadow: 0 6px 5px -2px rgb(162, 162, 162);
+    border-bottom: 1px solid #666;
+    position: relative;
+}
+
+.dialog_Parrot p,
+.dialog_User p {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 0 0 35px;
+}
+
+.dialog_Parrot:before {
+    pointer-events: none;
+    content: " ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 9px;
+    top: 51px;
+    border: 15px solid;
+    border-color: #666 transparent transparent #666;
+}
+
+.dialog_Parrot:after {
+    pointer-events: none;
+    content: " ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    left: 10px;
+    top: 49px;
+    border: 15px solid;
+    border-color: #fff transparent transparent #fff;
+}
+
+.dialog_User {
+    width: 200px;
+    height: 50px;
+    border-radius: 12px;
+    /* align-self: flex-start; */
+    margin: 40px;
+    background-color: white;
+    box-shadow: 0 6px 5px -2px rgb(162, 162, 162);
+    border-bottom: 1px solid #666;
+    position: relative;
+}
+
+.dialog_User:before {
+    pointer-events: none;
+    transform: scale(-1, 1);
+    content: " ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: 13px;
+    top: 51px;
+    border: 15px solid;
+    border-color: #666 transparent transparent #666;
+}
+
+.dialog_User:after {
+    pointer-events: none;
+    transform: scale(-1, 1);
+    content: " ";
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: 14px;
+    top: 49px;
+    border: 15px solid;
+    border-color: #fff transparent transparent #fff;
+}
