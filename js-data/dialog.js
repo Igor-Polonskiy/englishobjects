@@ -84,6 +84,7 @@
 
     function resetPuzzle() {
         dialog.innerHTML = ''
+        answers.innerHTML = ''
         stage = 0
         dialog_blure.style.display = 'flex'
 
