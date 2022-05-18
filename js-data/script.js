@@ -1,4 +1,5 @@
 (() => {
+
     /*все вхождения letter_A... заменить A на нужную букву*/
     let task = document.querySelector('.letter_A_wrapper')
     const interakt_zadanie = task.parentElement;
@@ -17,7 +18,8 @@
         /**/
         /*при необходимости подобрать нужный шрифт*/
     let font = 'Titillium Web'
-        /**/
+    cx.font = `bold 310px ${font}`;
+    /**/
     let isLetterComplete = false
         /*заменть цвет закраски буквы на нужный в формате rgb*/
         /*использовать любой кроме 
@@ -29,7 +31,6 @@
     let b = 0
         /**/
     let drowColor = `rgb(${r}, ${g}, ${b})`
-
 
 
     function setupCanvas() {
@@ -186,8 +187,15 @@
     c.addEventListener('pointerup', onmouseup, false);
     c.addEventListener('pointermove', onmousemove, false);
 
-    setupCanvas();
-    setTimeout(() => {
+    if (document.fonts) {
+        document.fonts.load(`bold 310px ${font}`).then(function() {
+            console.log('font loaded')
+            setupCanvas();
+        });
+    }
+
+
+    /*setTimeout(() => {
         setupCanvas();
-    }, 80);
+    }, 80);*/
 })()
