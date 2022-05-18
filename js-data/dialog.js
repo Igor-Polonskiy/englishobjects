@@ -22,7 +22,8 @@
     let task = document.querySelector('.dialog')
     let dialog = task.querySelector('.dialog_text')
     let answers = task.querySelector('.dialog_answers')
-    let dialog_blure = task.querySelector('.dialog_blure')
+    let dialog_blure = task.querySelector('.dialog_blure1')
+    let finish_blure = task.querySelector('.dialog_blure2')
     let startbtn = task.querySelector('.dialog_start')
 
     const interakt_zadanie = task.parentElement;
@@ -48,9 +49,8 @@
                 answers.append(answer)
             })
         }, 100)
-
-
     }
+
     startbtn.addEventListener('click', start)
     task.addEventListener('click', (e) => {
         if (e.target.classList.contains('dialog_answer')) {
@@ -77,6 +77,10 @@
                     })
                 }, 1100)
             }
+            if (stage === 3) {
+                setTimeout(() => finish_blure.style.display = 'flex', 1500)
+
+            }
         }
     })
 
@@ -87,7 +91,6 @@
         answers.innerHTML = ''
         stage = 0
         dialog_blure.style.display = 'flex'
-
+        finish_blure.style.display = 'none'
     }
-
 })()
