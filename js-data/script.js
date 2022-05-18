@@ -187,4 +187,7 @@
     c.addEventListener('pointermove', onmousemove, false);
 
     setupCanvas();
+    setTimeout(() => {
+        setupCanvas();
+    }, 80);
 })()
