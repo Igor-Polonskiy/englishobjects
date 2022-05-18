@@ -189,13 +189,8 @@
 
     if (document.fonts) {
         document.fonts.load(`bold 310px ${font}`).then(function() {
-            console.log('font loaded')
             setupCanvas();
         });
     }
 
-
-    /*setTimeout(() => {
-        setupCanvas();
-    }, 80);*/
 })()
