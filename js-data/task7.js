@@ -71,7 +71,6 @@
 
     let scrollWidth = dragField.scrollWidth
     let sliderWhidth = task.querySelector('.task_7_slider').clientWidth
-    console.log(scrollWidth)
 
     task.addEventListener('pointerdown', (e) => {
         if (e.target.classList.contains('task_7_pic') || e.target.classList.contains('task_7_pic_dropped')) {

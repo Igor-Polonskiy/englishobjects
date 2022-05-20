@@ -38,6 +38,7 @@
 }
 
 .task_9_dragitem {
+    user-select: none;
     display: flex;
     align-items: center;
     cursor: grab;

@@ -61,6 +61,7 @@
             picture.classList.add('task_10_drop')
             picture.style.backgroundImage = `url(${item.data})`
             picture.setAttribute('data-id', item.id)
+            picture.addEventListener('click', scaleImage)
             dropzone.append(picture)
         })
         dropitems = task.querySelectorAll('.task_10_drop')
@@ -74,16 +75,42 @@
             audio.setAttribute('data-id', item.id)
             let btn = document.createElement('button')
             btn.style.backgroundImage = `url(Images_18/soundToPic/sound.png)`
-            audio.append(btn)
             audio.addEventListener('click', (e) => {
                 audios[item.id - 1].addEventListener('ended', (event) => {
                     e.target.classList.remove('task_10_active')
                 })
                 audios[item.id - 1].play()
                 e.target.classList.add('task_10_active')
+                e.stopPropagation();
             })
+            audio.append(btn)
+
             dragzone.append(audio)
         })
+    }
+
+    function scaleImage(e) {
+        item = e.target
+        let modal = document.createElement('div')
+        modal.style.position = 'fixed'
+        modal.style.left = 0
+        modal.style.top = 0
+        modal.style.bottom = 0
+        modal.style.right = 0
+        modal.style.background = "rgba(0,0,0,0.5)"
+        modal.style.zIndex = 100
+        modal.style.display = 'flex'
+        modal.style.justifyContent = 'center'
+        modal.style.alignItems = 'center'
+        let img = document.createElement('img')
+        img.src = item.style.backgroundImage.slice(5, -2)
+        modal.append(img)
+        document.body.style.overflow = 'hidden'
+        modal.addEventListener('click', () => {
+            modal.remove()
+            document.body.style.overflow = 'visible'
+        })
+        document.body.append(modal)
     }
 
 
@@ -191,36 +218,42 @@
 
 
         // КОГДА ВО ВРЕМЯ ПЕРЕТАСКИВАНИЯ КУРСОР ВЫНЕСЛИ ЗА ПРЕДЕЛЫ ОКНА БРАУЗЕРА И ОТПУСТИЛИ ЗАХВАТ ЭЛЕМЕНТА
-        /*function moveOut(e) {
-            changeStylesAndAppend(dragzone, draggingItem);
-            window.removeEventListener('pointerup', moveOut);
-            document.removeEventListener('pointermove', onMouseMove);
-        }*/
         function moveOut(e) {
-            const elemUnderPount = document.elementFromPoint(e.clientX, e.clientY);
-            if (elemUnderPount !== draggingItem) {
+            if (draggingItem) {
                 changeStylesAndAppend(dragzone, draggingItem);
             }
             window.removeEventListener('pointerup', moveOut);
             document.removeEventListener('pointermove', onMouseMove);
         }
+        /*  function moveOut(e) {
+             const elemUnderPount = document.elementFromPoint(e.clientX, e.clientY);
+             if (elemUnderPount !== draggingItem) {
+                 changeStylesAndAppend(dragzone, draggingItem);
+             }
+             window.removeEventListener('pointerup', moveOut);
+             document.removeEventListener('pointermove', onMouseMove);
+         }*/
 
         // КОГДА КУРСОР В ЗОНЕ ДЛЯ ПЕРЕТАСКИВАНИЙ И ПОЛЬЗОВАТЕЛЬ ОТПУСТИЛ ЗАХВАТ ЭЛЕМЕНТА
         draggingItem.onpointerup = function() {
-            draggingItem.style.cursor = 'grab';
-            startAction = true;
-            checkButton_classList_changer();
-            if (clickWithoutMove) {
-                //changeStylesAndAppend(dragzone, draggingItem);
-            }
-            document.removeEventListener('pointermove', onMouseMove);
+            if (draggingItem) {
+                draggingItem.style.cursor = 'grab';
+                startAction = true;
+                checkButton_classList_changer();
+                if (clickWithoutMove) {
+                    //changeStylesAndAppend(dragzone, draggingItem);
 
-            // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
-            if (elemBelow.classList.contains('task_10_drop') && elemBelow.children.length === 0) {
-                changeStylesAndAppend(elemBelow, draggingItem);
-            } else {
-                changeStylesAndAppend(dragzone, draggingItem);
+                }
+                document.removeEventListener('pointermove', onMouseMove);
+
+                // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
+                if (elemBelow.classList.contains('task_10_drop') && elemBelow.children.length === 0) {
+                    changeStylesAndAppend(elemBelow, draggingItem);
+                } else {
+                    changeStylesAndAppend(dragzone, draggingItem);
+                }
             }
+
             draggingItem = null
         };
 

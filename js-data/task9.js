@@ -65,6 +65,7 @@
             picture.classList.add('task_9_drop')
             picture.style.backgroundImage = `url(${item.data})`
             picture.setAttribute('data-id', item.id)
+            picture.addEventListener('click', scaleImage)
             dropzone.append(picture)
         })
         dropitems = task.querySelectorAll('.task_9_drop')
@@ -79,6 +80,30 @@
             word.setAttribute('data-id', item.id)
             dragzone.append(word)
         })
+    }
+
+    function scaleImage(e) {
+        item = e.target
+        let modal = document.createElement('div')
+        modal.style.position = 'fixed'
+        modal.style.left = 0
+        modal.style.top = 0
+        modal.style.bottom = 0
+        modal.style.right = 0
+        modal.style.background = "rgba(0,0,0,0.5)"
+        modal.style.zIndex = 100
+        modal.style.display = 'flex'
+        modal.style.justifyContent = 'center'
+        modal.style.alignItems = 'center'
+        let img = document.createElement('img')
+        img.src = item.style.backgroundImage.slice(5, -2)
+        modal.append(img)
+        document.body.style.overflow = 'hidden'
+        modal.addEventListener('click', () => {
+            modal.remove()
+            document.body.style.overflow = 'visible'
+        })
+        document.body.append(modal)
     }
 
 

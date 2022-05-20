@@ -1,18 +1,16 @@
 (() => {
-    const reloadTaskBtn = document.querySelector('.task4_reloadTask')
-    const checkingTaskBtn = document.querySelector('.task4_checkingTask')
-    const checkTask = document.querySelector('.task4_checkTask')
-    const chek_answerTxt = document.querySelector('.task4_chek_answer')
-    const drops = document.querySelectorAll('.task4_imgWrapper_img')
-    const answersWrapper = document.querySelector('.task4_answers')
+
+    let drops
+
     const task = document.querySelector('.task4_wrapper')
+    const answersWrapper = task.querySelector('.task4_answers')
+    const dropsWrapper = task.querySelector('.task4_dropsWrapper')
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
 
     const drop = headCheck.querySelector('.drop');
     const check_your = headCheck.querySelector('.check_your');
     const result = headCheck.querySelector('.result');
-    const wordPazzle_dropWrapper = document.querySelector('.task4_imgWrapper');
     const wordPazzle_letters = document.querySelector('.task4_answers');
     let startAction = false;
 
@@ -35,6 +33,32 @@
         }
     ]
 
+    function scaleImage(e) {
+        item = e.target
+        let modal = document.createElement('div')
+        modal.style.position = 'fixed'
+        modal.style.left = 0
+        modal.style.top = 0
+        modal.style.bottom = 0
+        modal.style.right = 0
+        modal.style.background = "rgba(0,0,0,0.5)"
+        modal.style.zIndex = 100
+        modal.style.display = 'flex'
+        modal.style.justifyContent = 'center'
+        modal.style.alignItems = 'center'
+        let img = document.createElement('img')
+        img.src = item.style.backgroundImage.slice(5, -2)
+        modal.append(img)
+        document.body.style.overflow = 'hidden'
+        modal.addEventListener('click', () => {
+            modal.remove()
+            document.body.style.overflow = 'visible'
+        })
+        document.body.append(modal)
+
+        console.log('scale', item.style.backgroundImage)
+    }
+
     function setAnswers() {
         answers.sort(() => Math.random() - 0.5).forEach(item => {
             let answer = document.createElement('div')
@@ -42,8 +66,24 @@
             answer.style.backgroundImage = `url(${item.data})`
             answer.setAttribute('data-number', item.id)
             answersWrapper.append(answer)
+
         })
     }
+
+    function setDropItems() {
+        answers.forEach(item => {
+            let dropItem = document.createElement('div')
+            dropItem.classList.add('task4_drop_item')
+            dropItem.setAttribute('data-number', item.id)
+            let bg = document.createElement('div')
+            bg.classList.add('task4_bg')
+            bg.innerText = item.id
+            dropItem.append(bg)
+            dropsWrapper.append(dropItem)
+        })
+        drops = document.querySelectorAll('.task4_drop_item')
+    }
+    setDropItems()
     setAnswers()
 
     let draggingItem;
@@ -80,6 +120,12 @@
         document.body.appendChild(draggingItem);
 
         moveAt(event.pageX, event.pageY);
+        if (!event.path.includes(draggingItem)) {
+            window.addEventListener('pointerup', moveOut)
+        }
+        if (event.path.includes(draggingItem)) {
+            window.removeEventListener('pointerup', moveOut)
+        }
 
         function moveAt(pageX, pageY) {
             draggingItem.style.left = pageX - shiftX + 'px';
@@ -160,12 +206,13 @@
             startAction = true;
             checkButton_classList_changer();
             if (clickWithoutMove) {
+                scaleImage(event)
                 changeStylesAndAppend(wordPazzle_letters, draggingItem);
             }
             document.removeEventListener('pointermove', onMouseMove);
 
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
-            if (elemBelow.classList.contains('task4_imgWrapper_img')) {
+            if (elemBelow.classList.contains('task4_drop_item')) {
                 changeStylesAndAppend(elemBelow, draggingItem);
             } else {
                 changeStylesAndAppend(wordPazzle_letters, draggingItem);
@@ -202,7 +249,7 @@
         feedBackChanger('reset')
         drops.forEach(item => {
             if (item.children.length) {
-                [...item.children][0].remove()
+                [...item.children][1].remove()
             }
         })
 
@@ -216,7 +263,7 @@
         let winVar = 0
         drops.forEach(item => {
             if (item.children.length) {
-                if ([...item.children][0].getAttribute('data-number') === item.getAttribute('data-number')) {
+                if ([...item.children][1].getAttribute('data-number') === item.getAttribute('data-number')) {
                     winVar++
                 }
             }

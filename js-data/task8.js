@@ -55,7 +55,17 @@
             let picture = document.createElement('div')
             picture.classList.add('task_8_pic')
             picture.style.backgroundImage = `url(${item.src})`
+            picture.style.position = 'relative'
             picture.setAttribute('data-id', item.id)
+            let expand = document.createElement('div')
+            expand.style.width = '25px'
+            expand.style.height = '25px'
+            expand.style.backgroundImage = `url(Images_18//singleChoice/expand.svg)`
+            expand.style.backgroundSize = 'contain'
+            expand.style.position = 'absolute'
+            expand.style.top = '5px'
+            expand.style.right = '5px'
+            picture.append(expand)
             task.append(picture)
         })
         pictureItems = task.querySelectorAll('.task_8_pic')
