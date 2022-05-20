@@ -94,10 +94,21 @@
         modal.style.zIndex = 100
         modal.style.display = 'flex'
         modal.style.justifyContent = 'center'
+        modal.style.flexDirection = 'column'
         modal.style.alignItems = 'center'
+        let div = document.createElement('div')
         let img = document.createElement('img')
+            //img.src = item.src
         img.src = item.style.backgroundImage.slice(5, -2)
-        modal.append(img)
+        div.append(img)
+        modal.append(div)
+        let close = document.createElement('div')
+        close.style.width = '25px'
+        close.style.height = '25px'
+        close.style.marginLeft = 'calc(100% - 25px)'
+        close.style.cursor = 'pointer'
+        close.style.backgroundImage = `url(Images_18/close.png)`
+        div.append(close)
         document.body.style.overflow = 'hidden'
         modal.addEventListener('click', () => {
             modal.remove()

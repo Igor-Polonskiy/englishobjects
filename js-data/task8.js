@@ -65,6 +65,8 @@
             expand.style.position = 'absolute'
             expand.style.top = '5px'
             expand.style.right = '5px'
+            expand.title = 'развернуть'
+            expand.addEventListener('click', () => scaleImage(item.src))
             picture.append(expand)
             task.append(picture)
         })
@@ -121,5 +123,39 @@
             result.classList.remove(`result_win`);
             result.classList.remove(`result_lose`);
         }
+    }
+
+    function scaleImage(e) {
+        let modal = document.createElement('div')
+        modal.style.position = 'fixed'
+        modal.style.left = 0
+        modal.style.top = 0
+        modal.style.bottom = 0
+        modal.style.right = 0
+        modal.style.background = "rgba(0,0,0,0.5)"
+        modal.style.zIndex = 100
+        modal.style.display = 'flex'
+        modal.style.justifyContent = 'center'
+        modal.style.flexDirection = 'column'
+        modal.style.alignItems = 'center'
+        let div = document.createElement('div')
+        let img = document.createElement('img')
+        img.src = e
+            // img.src = item.style.backgroundImage.slice(5, -2)
+        div.append(img)
+        modal.append(div)
+        let close = document.createElement('div')
+        close.style.width = '25px'
+        close.style.height = '25px'
+        close.style.marginLeft = 'calc(100% - 25px)'
+        close.style.cursor = 'pointer'
+        close.style.backgroundImage = `url(Images_18/close.png)`
+        div.append(close)
+        document.body.style.overflow = 'hidden'
+        modal.addEventListener('click', () => {
+            modal.remove()
+            document.body.style.overflow = 'visible'
+        })
+        document.body.append(modal)
     }
 })()
