@@ -1,0 +1,54 @@
+    .leters_task {
+        width: 100%;
+    }
+    
+    .letters_task_img {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .letters_task_letter {
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
+        font-size: 30px;
+    }
+    
+    .letters_task_drop {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .letters_task_drag {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        width: 100%;
+        border-radius: 12px;
+        box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
+    }
+    
+    .letters_task_dragitem,
+    .letters_task_dragitem_dropped {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
+        font-size: 30px;
+        cursor: grab;
+    }
+    
+    .letters_task_dropItem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }

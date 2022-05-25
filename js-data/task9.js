@@ -98,7 +98,13 @@
         modal.style.alignItems = 'center'
         let div = document.createElement('div')
         let img = document.createElement('img')
-            //img.src = item.src
+        div.style.width = '50%';
+        div.style.height = '80%';
+        div.style.textAlign = 'center';
+        img.src = item.src;
+        img.style.maxWidth = '100%';
+        img.style.maxHeight = '100%';
+        //img.src = item.src
         img.src = item.style.backgroundImage.slice(5, -2)
         div.append(img)
         modal.append(div)

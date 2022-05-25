@@ -93,4 +93,5 @@
         dialog_blure.style.display = 'flex'
         finish_blure.style.display = 'none'
     }
+
 })()

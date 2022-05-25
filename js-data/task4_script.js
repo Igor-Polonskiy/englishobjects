@@ -129,12 +129,12 @@
         document.body.appendChild(draggingItem);
 
         moveAt(event.pageX, event.pageY);
-        if (!event.path.includes(draggingItem)) {
-            window.addEventListener('pointerup', moveOut)
-        }
-        if (event.path.includes(draggingItem)) {
-            window.removeEventListener('pointerup', moveOut)
-        }
+        /* if (!event.path.includes(draggingItem)) {
+             window.addEventListener('pointerup', moveOut)
+         }
+         if (event.path.includes(draggingItem)) {
+             window.removeEventListener('pointerup', moveOut)
+         }*/
 
         function moveAt(pageX, pageY) {
             draggingItem.style.left = pageX - shiftX + 'px';
@@ -204,7 +204,11 @@
 
         // КОГДА ВО ВРЕМЯ ПЕРЕТАСКИВАНИЯ КУРСОР ВЫНЕСЛИ ЗА ПРЕДЕЛЫ ОКНА БРАУЗЕРА И ОТПУСТИЛИ ЗАХВАТ ЭЛЕМЕНТА
         function moveOut(e) {
-            changeStylesAndAppend(wordPazzle_letters, draggingItem);
+            const elemUnderPount = document.elementFromPoint(e.clientX, e.clientY);
+            if (elemUnderPount !== draggingItem) {
+                changeStylesAndAppend(wordPazzle_letters, draggingItem);
+            }
+            //changeStylesAndAppend(wordPazzle_letters, draggingItem);
             window.removeEventListener('pointerup', moveOut);
             document.removeEventListener('pointermove', onMouseMove);
         }
@@ -215,8 +219,8 @@
             startAction = true;
             checkButton_classList_changer();
             if (clickWithoutMove) {
-                scaleImage(event)
                 changeStylesAndAppend(wordPazzle_letters, draggingItem);
+                setTimeout(() => scaleImage(event), 0)
             }
             document.removeEventListener('pointermove', onMouseMove);
 
