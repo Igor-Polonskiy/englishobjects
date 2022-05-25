@@ -58,12 +58,7 @@
     const headCheck = interakt_zadanie.previousElementSibling;
 
     const drop = headCheck.querySelector('.drop');
-    const check_your = headCheck.querySelector('.check_your');
-    const result = headCheck.querySelector('.result');
     let dataOrder = 0
-
-    let startAction = false;
-
 
     function start(item) {
         picture.innerHTML = ''
@@ -252,13 +247,11 @@
         };
 
         function changeStylesAndAppend(dropPlace, draggingElem) {
-
             draggingElem.style.position = 'relative ';
             draggingElem.style.zIndex = null;
             draggingElem.style.top = null;
             draggingElem.style.left = null;
             dropPlace.appendChild(draggingElem);
-
         }
     };
 
@@ -267,6 +260,8 @@
     function resetTask() {
         dataOrder = 0
         start(data[dataOrder])
+        dragZone.innerHTML = ''
+        filldragZone()
     }
 
     function checkAnswer() {
@@ -274,7 +269,21 @@
         if (draggingItem.innerText === dropField.getAttribute('data-letter')) {
             draggingItem.style.background = 'green'
             dataOrder++
-            setTimeout(() => start(data[dataOrder]), 1000)
+            setTimeout(() => {
+                if (dataOrder < data.length) {
+                    start(data[dataOrder])
+                } else {
+                    dragZone.innerHTML = ''
+                    dropZone.innerHTML = ''
+                    picture.innerHTML = ''
+                    let img = document.createElement('img')
+                    img.src = 'Images_18/1.png'
+                    img.style.height = '420px'
+                    picture.append(img)
+                    dragZone.innerHTML = 'WELL DONE'
+                }
+            }, 1000)
+
 
         } else draggingItem.style.background = 'red'
     }
