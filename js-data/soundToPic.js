@@ -1,37 +1,93 @@
 (() => {
 
-    let drops
-
-    const task = document.querySelector('.task4_wrapper')
-    const answersWrapper = task.querySelector('.task4_answers')
-    const dropsWrapper = task.querySelector('.task4_dropsWrapper')
+    const task = document.querySelector('.soundToPic')
+    const dropzone = task.querySelector('.soundToPic_dropzone')
+    const dragzone = task.querySelector('.soundToPic_dragzone')
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
+    const audios = task.querySelectorAll('.soundToPic_audio')
 
     const drop = headCheck.querySelector('.drop');
     const check_your = headCheck.querySelector('.check_your');
     const result = headCheck.querySelector('.result');
-    const wordPazzle_letters = document.querySelector('.task4_answers');
+
     let startAction = false;
+    let dropitems
 
 
-    const answers = [{
+    const pictures = [{
             id: 1,
-            data: 'Images_18/task_1.png'
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_19.png',
+
         },
         {
             id: 2,
-            data: 'Images_18/task_2.png'
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_20.png',
+
         },
         {
             id: 3,
-            data: 'Images_18/task_3.png'
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_21.png',
+
         },
         {
             id: 4,
-            data: 'Images_18/task_4.png'
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_22.png',
+
+        },
+        {
+            id: 5,
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_23.png',
+
+        },
+        {
+            id: 6,
+            data: 'Images_18/soundToPic/Eng-2021_2_1_1_24.png',
+
         }
     ]
+
+
+    insertPictures(pictures)
+    insertAudio(pictures)
+
+    function shuffleArr(arr) {
+        return arr.sort(() => Math.random() - 0.5)
+    }
+
+    function insertPictures(arr) {
+        shuffleArr(arr).forEach(item => {
+            let picture = document.createElement('div')
+            picture.classList.add('soundToPic_drop')
+            picture.style.backgroundImage = `url(${item.data})`
+            picture.setAttribute('data-id', item.id)
+            picture.addEventListener('click', scaleImage)
+            dropzone.append(picture)
+        })
+        dropitems = task.querySelectorAll('.soundToPic_drop')
+
+    }
+
+    function insertAudio(arr) {
+        shuffleArr(arr).forEach(item => {
+            let audio = document.createElement('div')
+            audio.classList.add('soundToPic_dragitem')
+            audio.setAttribute('data-id', item.id)
+            let btn = document.createElement('button')
+            btn.style.backgroundImage = `url(Images_18/soundToPic/sound.png)`
+            audio.addEventListener('click', (e) => {
+                audios[item.id - 1].addEventListener('ended', (event) => {
+                    e.target.classList.remove('soundToPic_active')
+                })
+                audios[item.id - 1].play()
+                e.target.classList.add('soundToPic_active')
+                e.stopPropagation();
+            })
+            audio.append(btn)
+
+            dragzone.append(audio)
+        })
+    }
 
     function scaleImage(e) {
         item = e.target
@@ -68,42 +124,18 @@
         document.body.append(modal)
     }
 
-    function setAnswers() {
-        answers.sort(() => Math.random() - 0.5).forEach(item => {
-            let answer = document.createElement('div')
-            answer.classList.add('task4_answer')
-            answer.style.backgroundImage = `url(${item.data})`
-            answer.setAttribute('data-number', item.id)
-            answersWrapper.append(answer)
-
-        })
-    }
-
-    function setDropItems() {
-        answers.forEach(item => {
-            let dropItem = document.createElement('div')
-            dropItem.classList.add('task4_drop_item')
-            dropItem.setAttribute('data-number', item.id)
-            let bg = document.createElement('div')
-            bg.classList.add('task4_bg')
-            bg.innerText = item.id
-            dropItem.append(bg)
-            dropsWrapper.append(dropItem)
-        })
-        drops = document.querySelectorAll('.task4_drop_item')
-    }
-    setDropItems()
-    setAnswers()
 
     let draggingItem;
     let elemBelow;
 
 
-    task.addEventListener('pointerdown', (e) => {
-        if (e.target.classList.contains('task4_answer')) {
+    task.addEventListener('pointerdown', draggingListner);
+
+    function draggingListner(e) {
+        if (e.target.classList.contains('soundToPic_dragitem')) {
             mouseDown(e)
         }
-    });
+    }
 
 
 
@@ -129,12 +161,6 @@
         document.body.appendChild(draggingItem);
 
         moveAt(event.pageX, event.pageY);
-        /* if (!event.path.includes(draggingItem)) {
-             window.addEventListener('pointerup', moveOut)
-         }
-         if (event.path.includes(draggingItem)) {
-             window.removeEventListener('pointerup', moveOut)
-         }*/
 
         function moveAt(pageX, pageY) {
             draggingItem.style.left = pageX - shiftX + 'px';
@@ -204,33 +230,44 @@
 
         // КОГДА ВО ВРЕМЯ ПЕРЕТАСКИВАНИЯ КУРСОР ВЫНЕСЛИ ЗА ПРЕДЕЛЫ ОКНА БРАУЗЕРА И ОТПУСТИЛИ ЗАХВАТ ЭЛЕМЕНТА
         function moveOut(e) {
-            const elemUnderPount = document.elementFromPoint(e.clientX, e.clientY);
-            if (elemUnderPount !== draggingItem) {
-                changeStylesAndAppend(wordPazzle_letters, draggingItem);
+            if (draggingItem) {
+                changeStylesAndAppend(dragzone, draggingItem);
             }
-            //changeStylesAndAppend(wordPazzle_letters, draggingItem);
             window.removeEventListener('pointerup', moveOut);
             document.removeEventListener('pointermove', onMouseMove);
         }
+        /*  function moveOut(e) {
+             const elemUnderPount = document.elementFromPoint(e.clientX, e.clientY);
+             if (elemUnderPount !== draggingItem) {
+                 changeStylesAndAppend(dragzone, draggingItem);
+             }
+             window.removeEventListener('pointerup', moveOut);
+             document.removeEventListener('pointermove', onMouseMove);
+         }*/
 
         // КОГДА КУРСОР В ЗОНЕ ДЛЯ ПЕРЕТАСКИВАНИЙ И ПОЛЬЗОВАТЕЛЬ ОТПУСТИЛ ЗАХВАТ ЭЛЕМЕНТА
         draggingItem.onpointerup = function() {
-            draggingItem.style.cursor = 'grab';
-            startAction = true;
-            checkButton_classList_changer();
-            if (clickWithoutMove) {
-                changeStylesAndAppend(wordPazzle_letters, draggingItem);
-                setTimeout(() => scaleImage(event), 0)
-            }
-            document.removeEventListener('pointermove', onMouseMove);
+            if (draggingItem) {
+                draggingItem.style.cursor = 'grab';
+                startAction = true;
+                checkButton_classList_changer();
+                if (clickWithoutMove) {
+                    //changeStylesAndAppend(dragzone, draggingItem);
 
-            // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
-            if (elemBelow.classList.contains('task4_drop_item')) {
-                changeStylesAndAppend(elemBelow, draggingItem);
-            } else {
-                changeStylesAndAppend(wordPazzle_letters, draggingItem);
+                }
+                document.removeEventListener('pointermove', onMouseMove);
+
+                // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
+                if (elemBelow.classList.contains('soundToPic_drop') && elemBelow.children.length === 0) {
+                    changeStylesAndAppend(elemBelow, draggingItem);
+                } else {
+                    changeStylesAndAppend(dragzone, draggingItem);
+                }
             }
+
+            draggingItem = null
         };
+
 
         function changeStylesAndAppend(dropPlace, draggingElem) {
             draggingElem.style.position = 'relative ';
@@ -241,52 +278,55 @@
         }
     };
 
-    drop.addEventListener('click', resetPuzzle);
+    drop.addEventListener('click', resetTask);
 
     function checkButton_classList_changer() {
 
         if (check_your.classList.contains('check_your_active') && !startAction) {
             check_your.classList.remove('check_your_active');
-            check_your.removeEventListener('click', checkPuzzle);
+            check_your.removeEventListener('click', checkTask);
         } else if (!check_your.classList.contains('check_your_active') && startAction) {
-            check_your.removeEventListener('click', checkPuzzle);
+            check_your.removeEventListener('click', checkTask);
             check_your.classList.add('check_your_active');
-            check_your.addEventListener('click', checkPuzzle);
+            check_your.addEventListener('click', checkTask);
         }
     }
 
 
-    function resetPuzzle() {
+    function resetTask() {
         startAction = false;
         checkButton_classList_changer();
         feedBackChanger('reset')
-        drops.forEach(item => {
-            if (item.children.length > 1) {
-                [...item.children][1].remove()
+
+        dropitems.forEach(item => {
+            if (item.children.length) {
+                [...item.children][0].classList.remove('soundToPic_right');
+                [...item.children][0].classList.remove('soundToPic_wrong');
+                dragzone.append([...item.children][0])
+
             }
         })
-
-        for (let i = (answersWrapper.childNodes.length - 1); i > 0; i--) {
-            answersWrapper.childNodes[i].remove()
-        }
-        setAnswers()
+        task.addEventListener('pointerdown', draggingListner);
     }
 
-    function checkPuzzle() {
+    function checkTask() {
         let winVar = 0
-        drops.forEach(item => {
-            if (item.children.length > 1) {
-                if ([...item.children][1].getAttribute('data-number') === item.getAttribute('data-number')) {
-                    winVar++
-                }
+        dropitems.forEach(item => {
+            if (item.children.length) {
+                if ([...item.children][0].getAttribute('data-id') === item.getAttribute('data-id')) {
+                    winVar++;
+                    [...item.children][0].classList.add('soundToPic_right')
+                } else [...item.children][0].classList.add('soundToPic_wrong')
             }
         })
 
-        if (winVar === 4) {
+        if (winVar === pictures.length) {
             feedBackChanger('win');
         } else {
             feedBackChanger('lose');
         }
+        draggingItem = null
+        task.removeEventListener('pointerdown', draggingListner);
     }
 
     function feedBackChanger(state) {

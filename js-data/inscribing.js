@@ -37,7 +37,7 @@
         }
     ]
 
-    let task = document.querySelector('.task_5')
+    let task = document.querySelector('.inscribing')
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
     const drop = headCheck.querySelector('.drop');
@@ -50,7 +50,7 @@
         task.innerHTML = ''
         let img = document.createElement('div')
         img.style.backgroundImage = `url(${item.src})`
-        img.classList.add('task5_img')
+        img.classList.add('inscribing_img')
         let caption = document.createElement('p')
         caption.innerText = item.caption
         task.append(img, caption)

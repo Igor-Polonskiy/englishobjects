@@ -1,9 +1,9 @@
-.task_10 {
+.soundToPic {
     width: 770px;
     margin: auto;
 }
 
-.task_10_dropzone {
+.soundToPic_dropzone {
     margin: auto;
     display: flex;
     max-width: 770px;
@@ -11,7 +11,7 @@
     justify-content: space-evenly;
 }
 
-.task_10_drop {
+.soundToPic_drop {
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -25,7 +25,7 @@
     box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
 }
 
-.task_10_dragzone {
+.soundToPic_dragzone {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -37,7 +37,7 @@
     gap: 10px;
 }
 
-.task_10_dragitem {
+.soundToPic_dragitem {
     display: flex;
     cursor: grab;
     background-color: #ffffff;
@@ -50,7 +50,7 @@
     height: 100px;
 }
 
-.task_10_dragitem button {
+.soundToPic_dragitem button {
     margin: 0 !important;
     cursor: pointer;
     width: 50px;
@@ -63,37 +63,37 @@
     transition: all 0.3s !important;
 }
 
-.task_10_dragitem button:hover {
+.soundToPic_dragitem button:hover {
     transform: rotate(-45deg);
     transition: all 0.3s;
 }
 
-.task_10_active {
+.soundToPic_active {
     border: 2px solid yellow !important;
 }
 
-.task_10_right {
+.soundToPic_right {
     border: 2px solid green;
 }
 
-.task_10_wrong {
+.soundToPic_wrong {
     border: 2px solid red;
 }
 
-.task_10_audio {
+.soundToPic_audio {
     display: none !important;
 }
 
 @media(max-width: 1250px) {
-    .task_10_dropzone {
+    .soundToPic_dropzone {
         width: 600px;
     }
-    .task_10_dragitem button {
+    .soundToPic_dragitem button {
         cursor: pointer;
         width: 40px;
         height: 40px;
     }
-    .task_10_dragitem {
+    .soundToPic_dragitem {
         width: 85px;
         height: 85px;
     }

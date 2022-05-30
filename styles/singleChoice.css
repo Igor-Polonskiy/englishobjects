@@ -1,11 +1,11 @@
-.task_8 {
+.singleChoice {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px auto;
 }
 
-.task_8_pic {
+.singleChoice_pic {
     box-sizing: border-box;
     font-size: 20px;
     font-weight: 600;
@@ -27,24 +27,24 @@
     padding: 5px;
 }
 
-.task_8_pic:hover {
+.singleChoice_pic:hover {
     box-shadow: -5px -5px 15px #b8b7b7, 5px 5px 15px #99999b;
 }
 
-.task_8_pic_active {
+.singleChoice_pic_active {
     border: 5px solid blue
 }
 
-.task_8_green {
+.singleChoice_green {
     border: 5px solid green;
 }
 
-.task_8_red {
+.singleChoice_red {
     border: 5px solid red;
 }
 
 @media(max-width:1250px) {
-    .task_8_pic {
+    .singleChoice_pic {
         width: 150px;
         height: 120px;
     }

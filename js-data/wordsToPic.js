@@ -1,8 +1,8 @@
 (() => {
 
-    const task = document.querySelector('.task_9')
-    const dropzone = task.querySelector('.task_9_dropzone')
-    const dragzone = task.querySelector('.task_9_dragzone')
+    const task = document.querySelector('.wordsToPic')
+    const dropzone = task.querySelector('.wordsToPic_dropzone')
+    const dragzone = task.querySelector('.wordsToPic_dragzone')
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
 
@@ -62,20 +62,20 @@
     function insertPictures(arr) {
         shuffleArr(arr).forEach(item => {
             let picture = document.createElement('div')
-            picture.classList.add('task_9_drop')
+            picture.classList.add('wordsToPic_drop')
             picture.style.backgroundImage = `url(${item.data})`
             picture.setAttribute('data-id', item.id)
             picture.addEventListener('click', scaleImage)
             dropzone.append(picture)
         })
-        dropitems = task.querySelectorAll('.task_9_drop')
+        dropitems = task.querySelectorAll('.wordsToPic_drop')
 
     }
 
     function insertWords(arr) {
         shuffleArr(arr).forEach(item => {
             let word = document.createElement('div')
-            word.classList.add('task_9_dragitem')
+            word.classList.add('wordsToPic_dragitem')
             word.innerText = item.text
             word.setAttribute('data-id', item.id)
             dragzone.append(word)
@@ -131,7 +131,7 @@
     task.addEventListener('pointerdown', draggingListner);
 
     function draggingListner(e) {
-        if (e.target.classList.contains('task_9_dragitem')) {
+        if (e.target.classList.contains('wordsToPic_dragitem')) {
             mouseDown(e)
         }
     }
@@ -253,7 +253,7 @@
             document.removeEventListener('pointermove', onMouseMove);
 
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
-            if (elemBelow.classList.contains('task_9_drop') && elemBelow.children.length === 0) {
+            if (elemBelow.classList.contains('wordsToPic_drop') && elemBelow.children.length === 0) {
                 changeStylesAndAppend(elemBelow, draggingItem);
             } else {
                 changeStylesAndAppend(dragzone, draggingItem);
@@ -269,30 +269,30 @@
         }
     };
 
-    drop.addEventListener('click', resetPuzzle);
+    drop.addEventListener('click', resetTask);
 
     function checkButton_classList_changer() {
 
         if (check_your.classList.contains('check_your_active') && !startAction) {
             check_your.classList.remove('check_your_active');
-            check_your.removeEventListener('click', checkPuzzle);
+            check_your.removeEventListener('click', checkTask);
         } else if (!check_your.classList.contains('check_your_active') && startAction) {
-            check_your.removeEventListener('click', checkPuzzle);
+            check_your.removeEventListener('click', checkTask);
             check_your.classList.add('check_your_active');
-            check_your.addEventListener('click', checkPuzzle);
+            check_your.addEventListener('click', checkTask);
         }
     }
 
 
-    function resetPuzzle() {
+    function resetTask() {
         startAction = false;
         checkButton_classList_changer();
         feedBackChanger('reset')
 
         dropitems.forEach(item => {
             if (item.children.length) {
-                [...item.children][0].classList.remove('task_9_right');
-                [...item.children][0].classList.remove('task_9_wrong');
+                [...item.children][0].classList.remove('wordsToPic_right');
+                [...item.children][0].classList.remove('wordsToPic_wrong');
                 dragzone.append([...item.children][0])
 
             }
@@ -300,14 +300,14 @@
         task.addEventListener('pointerdown', draggingListner);
     }
 
-    function checkPuzzle() {
+    function checkTask() {
         let winVar = 0
         dropitems.forEach(item => {
             if (item.children.length) {
                 if ([...item.children][0].getAttribute('data-id') === item.getAttribute('data-id')) {
                     winVar++;
-                    [...item.children][0].classList.add('task_9_right')
-                } else [...item.children][0].classList.add('task_9_wrong')
+                    [...item.children][0].classList.add('wordsToPic_right')
+                } else [...item.children][0].classList.add('wordsToPic_wrong')
             }
         })
 

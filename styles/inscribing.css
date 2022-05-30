@@ -1,11 +1,11 @@
-.task_5 {
+.inscribing {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 515px;
 }
 
-.task5_img {
+.inscribing_img {
     width: 600px;
     height: 400px;
     background-color: antiquewhite;
@@ -14,12 +14,12 @@
     background-repeat: no-repeat;
 }
 
-.task_5 p {
+.inscribing p {
     font-size: 24px;
     text-align: center;
 }
 
-.task_5 input {
+.inscribing input {
     text-align: center;
     font-size: 24px;
     height: 30px;
@@ -27,11 +27,11 @@
     border: 2px solid rgb(36, 179, 230);
 }
 
-.task_5 input:focus {
+.inscribing input:focus {
     outline: none;
 }
 
-.task_5 button {
+.inscribing button {
     width: 36px;
     height: 36px;
     cursor: pointer;
@@ -39,7 +39,7 @@
     border-radius: 5px;
 }
 
-.task_5 form {
+.inscribing form {
     display: flex;
     align-items: center;
 }

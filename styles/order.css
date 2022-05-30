@@ -1,24 +1,24 @@
-.task4_wrapper {
+.order_wrapper {
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 100%;
 }
 
-.task4_dropsWrapper {
+.order_dropsWrapper {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
 
-.task4_container {
+.order_container {
     width: 24%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.task4_drop_item {
+.order_drop_item {
     width: 24%;
     position: relative;
     height: 200px;
@@ -32,7 +32,7 @@
     border-radius: 10px;
 }
 
-.task4_bg {
+.order_bg {
     position: absolute;
     display: flex;
     align-items: center;
@@ -48,7 +48,7 @@
     overflow: hidden;
 }
 
-.task4_answers {
+.order_answers {
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
@@ -59,7 +59,7 @@
     border-radius: 10px;
 }
 
-.task4_answer {
+.order_answer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,28 +77,28 @@
     background-size: cover;
 }
 
-.task4_answer span {
+.order_answer span {
     cursor: pointer;
     font-size: 24px;
 }
 
-.task4_checkTask {
+.order_checkTask {
     display: flex;
     justify-content: space-between;
     width: 100%;
     margin-top: 20px;
 }
 
-.task4_chek_answer {
+.order_chek_answer {
     font-size: 26px;
 }
 
 @media(max-width:1250px) {
-    .task4_answer {
+    .order_answer {
         width: 140px;
         height: 120px;
     }
-    .task4_drop_item {
+    .order_drop_item {
         height: 150px;
     }
 }

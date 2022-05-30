@@ -40,15 +40,15 @@
 
         }
     ]
-    let task = document.querySelector('.task_7')
-    let dragField = task.querySelector('.task_7_drag')
-    let dropField = task.querySelector('.task_7_drop')
+    let task = document.querySelector('.sandwich2')
+    let dragField = task.querySelector('.sandwich2_drag')
+    let dropField = task.querySelector('.sandwich2_drop')
     dropField.style.backgroundImage = `url('Images_18/sandwich2/sandwich1.png')`
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
-    let prev = task.querySelector('.task_7_btn_prev')
-    let next = task.querySelector('.task_7_btn_next')
-    let audio = task.querySelector('.task_7_audio')
+    let prev = task.querySelector('.sandwich2_btn_prev')
+    let next = task.querySelector('.sandwich2_btn_next')
+    let audio = task.querySelector('.sandwich2_audio')
 
     const drop = headCheck.querySelector('.drop');
     const check_your = headCheck.querySelector('.check_your');
@@ -60,7 +60,7 @@
 
     pictures.forEach(item => {
         let pic = document.createElement('div')
-        pic.classList.add('task_7_pic')
+        pic.classList.add('sandwich2_pic')
         pic.style.backgroundImage = `url(${item.src})`
         pic.setAttribute('data-id', item.id)
         dragField.append(pic)
@@ -70,10 +70,10 @@
     let elemBelow;
 
     let scrollWidth = dragField.scrollWidth
-    let sliderWhidth = task.querySelector('.task_7_slider').clientWidth
+    let sliderWhidth = task.querySelector('.sandwich2_slider').clientWidth
 
     task.addEventListener('pointerdown', (e) => {
-        if (e.target.classList.contains('task_7_pic') || e.target.classList.contains('task_7_pic_dropped')) {
+        if (e.target.classList.contains('sandwich2_pic') || e.target.classList.contains('sandwich2_pic_dropped')) {
             mouseDown(e)
         }
     });
@@ -97,9 +97,9 @@
 
     function mouseDown(event) {
         if (event.button === 2) return;
-        if (event.target.classList.contains('task_7_pic')) {
+        if (event.target.classList.contains('sandwich2_pic')) {
             draggingItem = document.createElement('div')
-            draggingItem.classList.add('task_7_pic_dropped')
+            draggingItem.classList.add('sandwich2_pic_dropped')
             draggingItem.style.backgroundImage = `url(${pictures[+event.target.getAttribute('data-id')-1].src})`
 
 
@@ -114,7 +114,7 @@
             shiftY = event.clientY - event.target.getBoundingClientRect().top;
             moveAt(event.pageX, event.pageY);
         }
-        if (event.target.classList.contains('task_7_pic_dropped')) {
+        if (event.target.classList.contains('sandwich2_pic_dropped')) {
             draggingItem = event.target
 
             draggingItem.style.touchAction = 'none'; //ОБЯЗАТЕЛЬНОЕ УСЛОВИЕ(МОЖНО УБРАТЬ И ПРОПИСАТЬ В СТИЛЬ САМОМУ ОБЪЕКТУ) 
@@ -239,8 +239,8 @@
 
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
             //
-            if (elemBelow.closest(".task_7_drop") || elemBelow.classList.contains('task_7_drop')) {
-                elemBelow = elemBelow.closest(".task_7_drop")
+            if (elemBelow.closest(".sandwich2_drop") || elemBelow.classList.contains('sandwich2_drop')) {
+                elemBelow = elemBelow.closest(".sandwich2_drop")
                 changeStylesAndAppend(elemBelow, draggingItem);
             } else {
                 draggingItem.remove()
@@ -261,20 +261,20 @@
         }
     };
 
-    drop.addEventListener('click', resetPuzzle);
+    drop.addEventListener('click', resetTask);
 
     function checkButton_classList_changer() {
         if (check_your.classList.contains('check_your_active') && !startAction) {
             check_your.classList.remove('check_your_active');
-            check_your.removeEventListener('click', check_task);
+            check_your.removeEventListener('click', checkTask);
         } else if (!check_your.classList.contains('check_your_active') && startAction) {
-            check_your.removeEventListener('click', check_task);
+            check_your.removeEventListener('click', checkTask);
             check_your.classList.add('check_your_active');
-            check_your.addEventListener('click', check_task);
+            check_your.addEventListener('click', checkTask);
         }
     }
 
-    function check_task() {
+    function checkTask() {
 
         let win = document.createElement('div')
         win.innerText = `A vegetable Bunny Sandwich is ready! 
@@ -296,7 +296,7 @@
         checkButton_classList_changer();
     }
 
-    function resetPuzzle() {
+    function resetTask() {
         startAction = false;
         checkButton_classList_changer();
 

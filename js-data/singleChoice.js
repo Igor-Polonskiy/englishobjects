@@ -14,7 +14,7 @@
         }
     ]
 
-    let task = document.querySelector('.task_8')
+    let task = document.querySelector('.singleChoice')
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
     const drop = headCheck.querySelector('.drop');
@@ -29,16 +29,16 @@
 
     insertAnswers(pictures)
     task.addEventListener('click', (e) => {
-        if (e.target.classList.contains('task_8_pic')) {
+        if (e.target.classList.contains('singleChoice_pic')) {
             pictureItems.forEach(item => {
                 if (finishAnswer) {
-                    finishAnswer.classList.remove('task_8_pic_active')
-                    finishAnswer.classList.remove('task_8_green')
-                    finishAnswer.classList.remove('task_8_red')
+                    finishAnswer.classList.remove('singleChoice_pic_active')
+                    finishAnswer.classList.remove('singleChoice_green')
+                    finishAnswer.classList.remove('singleChoice_red')
                 }
-                item.classList.remove('task_8_pic_active')
+                item.classList.remove('singleChoice_pic_active')
             })
-            e.target.classList.add('task_8_pic_active')
+            e.target.classList.add('singleChoice_pic_active')
             finishAnswer = e.target
             startAction = true;
             checkButton_classList_changer();
@@ -53,7 +53,7 @@
     function insertAnswers(arr) {
         shuffleArr(pictures).forEach(item => {
             let picture = document.createElement('div')
-            picture.classList.add('task_8_pic')
+            picture.classList.add('singleChoice_pic')
             picture.style.backgroundImage = `url(${item.src})`
             picture.style.position = 'relative'
             picture.setAttribute('data-id', item.id)
@@ -70,32 +70,32 @@
             picture.append(expand)
             task.append(picture)
         })
-        pictureItems = task.querySelectorAll('.task_8_pic')
+        pictureItems = task.querySelectorAll('.singleChoice_pic')
     }
 
-    drop.addEventListener('click', resetPuzzle);
+    drop.addEventListener('click', resetTask);
 
     function checkButton_classList_changer() {
         if (check_your.classList.contains('check_your_active') && !startAction) {
             check_your.classList.remove('check_your_active');
-            check_your.removeEventListener('click', check_task);
+            check_your.removeEventListener('click', checkTask);
         } else if (!check_your.classList.contains('check_your_active') && startAction) {
-            check_your.removeEventListener('click', check_task);
+            check_your.removeEventListener('click', checkTask);
             check_your.classList.add('check_your_active');
-            check_your.addEventListener('click', check_task);
+            check_your.addEventListener('click', checkTask);
         }
     }
 
-    function check_task() {
+    function checkTask() {
         if (finishAnswer) {
-            finishAnswer.classList.remove('task_8_pic_active')
+            finishAnswer.classList.remove('singleChoice_pic_active')
 
             if (finishAnswer.getAttribute('data-id') === winVar) {
-                finishAnswer.classList.add('task_8_green')
+                finishAnswer.classList.add('singleChoice_green')
                 feedBackChanger('win');
 
             } else {
-                finishAnswer.classList.add('task_8_red')
+                finishAnswer.classList.add('singleChoice_red')
                 feedBackChanger('lose');
 
             }
@@ -104,14 +104,14 @@
 
     }
 
-    function resetPuzzle() {
+    function resetTask() {
         startAction = false;
         checkButton_classList_changer();
         feedBackChanger('reset')
         if (finishAnswer) {
-            finishAnswer.classList.remove('task_8_pic_active')
-            finishAnswer.classList.remove('task_8_green')
-            finishAnswer.classList.remove('task_8_red')
+            finishAnswer.classList.remove('singleChoice_pic_active')
+            finishAnswer.classList.remove('singleChoice_green')
+            finishAnswer.classList.remove('singleChoice_red')
         }
         finishAnswer = null
     }

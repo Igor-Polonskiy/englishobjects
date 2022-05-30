@@ -42,12 +42,16 @@
 
     let draggingItem;
     let elemBelow;
+    let dominoTop
 
 
     task.addEventListener('pointerdown', draggingListner);
 
     function draggingListner(e) {
         if (e.target.classList.contains('domino_half')) {
+            if (e.target.parentElement.children[0] === e.target) {
+                dominoTop = true
+            } else dominoTop = false
             mouseDown(e)
         }
     }
@@ -61,6 +65,8 @@
         draggingItem.style.cursor = 'grabbing';
         let shiftX = event.clientX - draggingItem.getBoundingClientRect().left;
         let shiftY = event.clientY - draggingItem.getBoundingClientRect().top;
+
+
 
         // ЛИММИТЫ КООРДИНАТ ОГРАНИЧИВАЮЩИЕ ВЫЛЕТ ПЕРЕТАСКИВАЕМОГО ЭЛЕМЕНТА ЗА БЛОК
         //  (ПО УМОЛЧАНИЮ interact_zadanie - РОДИТЕЛЬ ВАШЕГО БЛОКА)
@@ -83,8 +89,13 @@
         }
 
         elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        draggingItem.style.visibility = 'hidden'
+        elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+        draggingItem.style.visibility = 'visible';
 
         let clickWithoutMove = true;
+
+        deleteBuzy(elemBelow)
 
         function onMouseMove(event) {
             let newLocation = {
@@ -173,7 +184,7 @@
                 document.removeEventListener('pointermove', onMouseMove);
 
                 // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
-                if (elemBelow.classList.contains('domino_cell') && elemBelow.children.length === 0) {
+                if (elemBelow.classList.contains('domino_cell')) {
 
                     changeStylesAndAppend(elemBelow, draggingItem);
                 } else {
@@ -186,19 +197,149 @@
 
 
         function changeStylesAndAppend(dropPlace, draggingElem) {
-            if (dropPlace !== dragzone) {
-                draggingElem.style.top = ` ${dropPlace.getBoundingClientRect().top  - domino_field.getBoundingClientRect().top}px`;
-                draggingElem.style.left = `${dropPlace.getBoundingClientRect().left - domino_field.getBoundingClientRect().left}px`;
-                dropPlace.parentElement.appendChild(draggingElem);
-            } else {
+            function returnDragingelement() {
                 draggingElem.style.position = 'relative ';
                 draggingElem.style.zIndex = null;
                 draggingElem.style.top = null;
                 draggingElem.style.left = null;
-                dropPlace.appendChild(draggingElem);
+                dragzone.append(draggingElem);
+            }
+
+            if (dropPlace !== dragzone) {
+                if (dominoTop) {
+                    if (draggingElem.classList.contains('domino_horizon') && dropPlace.nextElementSibling.classList.contains('cell_buzy')) {
+                        returnDragingelement()
+                        return
+                    } else if (!draggingElem.classList.contains('domino_horizon') && domino_field.children[9 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
+                        returnDragingelement()
+                        return
+                    } else {
+                        draggingElem.style.top = ` ${dropPlace.getBoundingClientRect().top  - domino_field.getBoundingClientRect().top}px`;
+                        draggingElem.style.left = `${dropPlace.getBoundingClientRect().left - domino_field.getBoundingClientRect().left}px`;
+                        if (draggingElem.classList.contains('domino_horizon')) {
+                            dropPlace.classList.add('cell_buzy')
+                            dropPlace.nextElementSibling.classList.add('cell_buzy')
+
+                            let data1 = draggingElem.children[0].getAttribute('data-answer')
+                            dropPlace.previousElementSibling.setAttribute('data-answer', data1)
+                            dropPlace.previousElementSibling.innerText = data1
+                            domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                            domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = data1
+                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = data1
+                            let data2 = draggingElem.children[1].getAttribute('data-answer')
+                            dropPlace.nextElementSibling.nextElementSibling.setAttribute('data-answer', data2)
+                            dropPlace.nextElementSibling.nextElementSibling.innerText = data2
+                            domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
+                            domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = data2
+                            domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
+                            domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = data2
+
+                        } else {
+                            dropPlace.classList.add('cell_buzy')
+                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].classList.add('cell_buzy')
+
+                            let data1 = draggingElem.children[0].getAttribute('data-answer')
+                            dropPlace.previousElementSibling.setAttribute('data-answer', data1)
+                            dropPlace.previousElementSibling.innerText = data1
+                            domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                            domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = data1
+                            dropPlace.nextElementSibling.setAttribute('data-answer', data1)
+                            dropPlace.nextElementSibling.innerText = data1
+                            let data2 = draggingElem.children[1].getAttribute('data-answer')
+                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', data2)
+                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = data2
+                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', data2)
+                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = data2
+                            domino_field.children[19 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data2)
+                            domino_field.children[19 + +dropPlace.getAttribute('data-number')].innerText = data2
+                        }
+                    }
+
+                } else if (!dominoTop) {
+                    if (draggingElem.classList.contains('domino_horizon') && dropPlace.previousElementSibling.classList.contains('cell_buzy')) {
+                        returnDragingelement()
+                        return
+                    } else if (!draggingElem.classList.contains('domino_horizon') && domino_field.children[-11 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
+                        returnDragingelement()
+                        return
+                    }
+
+                    if (draggingElem.classList.contains('domino_horizon')) {
+                        draggingElem.style.top = ` ${dropPlace.getBoundingClientRect().top  - domino_field.getBoundingClientRect().top}px`;
+                        draggingElem.style.left = `${dropPlace.getBoundingClientRect().left-50 - domino_field.getBoundingClientRect().left}px`;
+                        dropPlace.classList.add('cell_buzy')
+                        dropPlace.previousElementSibling.classList.add('cell_buzy')
+
+                        let data1 = draggingElem.children[1].getAttribute('data-answer')
+                        dropPlace.nextElementSibling.setAttribute('data-answer', data1)
+                        dropPlace.nextElementSibling.innerText = data1
+                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = data1
+                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = data1
+                        let data2 = draggingElem.children[0].getAttribute('data-answer')
+                        dropPlace.previousElementSibling.previousElementSibling.setAttribute('data-answer', data2)
+                        dropPlace.previousElementSibling.previousElementSibling.innerText = data2
+                        domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
+                        domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = data2
+                        domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
+                        domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = data2
+
+
+
+                    } else {
+                        draggingElem.style.top = ` ${dropPlace.getBoundingClientRect().top-50  - domino_field.getBoundingClientRect().top}px`;
+                        draggingElem.style.left = `${dropPlace.getBoundingClientRect().left - domino_field.getBoundingClientRect().left}px`;
+                        dropPlace.classList.add('cell_buzy')
+                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].classList.add('cell_buzy')
+
+                        let data1 = draggingElem.children[1].getAttribute('data-answer')
+                        dropPlace.previousElementSibling.setAttribute('data-answer', data1)
+                        dropPlace.previousElementSibling.innerText = data1
+                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = data1
+                        dropPlace.nextElementSibling.setAttribute('data-answer', data1)
+                        dropPlace.nextElementSibling.innerText = data1
+                        let data2 = draggingElem.children[0].getAttribute('data-answer')
+                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', data2)
+                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = data2
+                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', data2)
+                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = data2
+                        domino_field.children[-21 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data2)
+                        domino_field.children[-21 + +dropPlace.getAttribute('data-number')].innerText = data2
+
+                    }
+
+                }
+                dropPlace.parentElement.appendChild(draggingElem);
+            } else {
+                returnDragingelement()
             }
         }
     };
+
+    function deleteBuzy(elemBelow) {
+        if (elemBelow.classList.contains('domino_cell')) {
+            elemBelow.classList.remove('cell_buzy')
+            if (dominoTop) {
+                if (draggingItem.classList.contains('domino_horizon')) {
+                    elemBelow.nextElementSibling.classList.remove('cell_buzy')
+                } else {
+                    console.log(domino_field.children[9 + +elemBelow.getAttribute('data-number')])
+                    domino_field.children[9 + +elemBelow.getAttribute('data-number')].classList.remove('cell_buzy')
+                }
+            } else {
+                if (draggingItem.classList.contains('domino_horizon')) {
+                    elemBelow.previousElementSibling.classList.remove('cell_buzy')
+                } else {
+                    console.log(domino_field.children[9 + +elemBelow.getAttribute('data-number')])
+                    domino_field.children[-11 + +elemBelow.getAttribute('data-number')].classList.remove('cell_buzy')
+                }
+            }
+        }
+
+    }
 
 
 

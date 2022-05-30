@@ -40,3 +40,7 @@
     height: 120px;
     width: 100%;
 }
+
+.cell_buzy {
+    background-color: bisque;
+}
