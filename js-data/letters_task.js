@@ -278,7 +278,7 @@
                     dropZone.innerHTML = ''
                     picture.innerHTML = ''
                     let img = document.createElement('img')
-                    img.src = 'Images_18/1.png'
+                    img.src = 'Images_18/common/1.png'
                     img.style.height = '420px'
                     picture.append(img)
                     dragZone.innerHTML = 'WELL DONE'
@@ -320,7 +320,7 @@
         close.style.height = '25px'
         close.style.marginLeft = 'calc(100% - 25px)'
         close.style.cursor = 'pointer'
-        close.style.backgroundImage = `url(Images_18/close.png)`
+        close.style.backgroundImage = `url(Images_18/common/close.png)`
         div.append(close)
         document.body.style.overflow = 'hidden'
         modal.addEventListener('click', () => {

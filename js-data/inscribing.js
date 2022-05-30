@@ -1,37 +1,37 @@
 (() => {
     let items = [{
             id: 1,
-            src: 'Images_18/Eng-2021_2_9_1_17.png',
+            src: 'Images_18/inscribing/Eng-2021_2_9_1_17.png',
             caption: 'How many trees are there in the park?',
             answer: 'twelve'
         },
         {
             id: 2,
-            src: 'Images_18/Eng-2021_2_9_1_18.png',
+            src: 'Images_18/inscribing/Eng-2021_2_9_1_18.png',
             caption: 'How many cars are there in the street?',
             answer: 'five'
         },
         {
             id: 3,
-            src: 'Images_18/Eng-2021_2_9_1_19.png',
+            src: 'Images_18/inscribing/Eng-2021_2_9_1_19.png',
             caption: 'How many swings are there in the playground? ',
             answer: 'three'
         },
         {
             id: 4,
-            src: 'Images_18/Eng-2021_2_9_1_20.png',
+            src: 'Images_18/inscribing/Eng-2021_2_9_1_20.png',
             caption: 'How many children are there in the swimming pool? ',
             answer: 'ten'
         },
         {
             id: 5,
-            src: 'Images_18/Eng-2021_2_9_1_21.png',
+            src: 'Images_18/inscribing/Eng-2021_2_9_1_21.png',
             caption: 'How many shops are there in the street? ',
             answer: 'four'
         },
         {
             id: 6,
-            src: 'Images_18/1.png',
+            src: 'Images_18/common/1.png',
             caption: 'Well done!',
 
         }

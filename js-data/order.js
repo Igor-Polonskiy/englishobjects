@@ -17,19 +17,19 @@
 
     const answers = [{
             id: 1,
-            data: 'Images_18/task_1.png'
+            data: 'Images_18/order/task_1.png'
         },
         {
             id: 2,
-            data: 'Images_18/task_2.png'
+            data: 'Images_18/order/task_2.png'
         },
         {
             id: 3,
-            data: 'Images_18/task_3.png'
+            data: 'Images_18/order/task_3.png'
         },
         {
             id: 4,
-            data: 'Images_18/task_4.png'
+            data: 'Images_18/order/task_4.png'
         }
     ]
 
@@ -58,7 +58,7 @@
         close.style.height = '25px'
         close.style.marginLeft = 'calc(100% - 25px)'
         close.style.cursor = 'pointer'
-        close.style.backgroundImage = `url(Images_18/close.png)`
+        close.style.backgroundImage = `url(Images_18/common/close.png)`
         div.append(close)
         document.body.style.overflow = 'hidden'
         modal.addEventListener('click', () => {

@@ -43,6 +43,7 @@
     let draggingItem;
     let elemBelow;
     let dominoTop
+    let dominoCount = 0
 
 
     task.addEventListener('pointerdown', draggingListner);
@@ -217,42 +218,72 @@
                         draggingElem.style.top = ` ${dropPlace.getBoundingClientRect().top  - domino_field.getBoundingClientRect().top}px`;
                         draggingElem.style.left = `${dropPlace.getBoundingClientRect().left - domino_field.getBoundingClientRect().left}px`;
                         if (draggingElem.classList.contains('domino_horizon')) {
-                            dropPlace.classList.add('cell_buzy')
-                            dropPlace.nextElementSibling.classList.add('cell_buzy')
+                            if (dominoCount == 0) {
+                                dropPlace.classList.add('cell_buzy')
+                                dropPlace.nextElementSibling.classList.add('cell_buzy')
 
-                            let data1 = draggingElem.children[0].getAttribute('data-answer')
-                            dropPlace.previousElementSibling.setAttribute('data-answer', data1)
-                            dropPlace.previousElementSibling.innerText = data1
-                            domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
-                            domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = data1
-                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
-                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = data1
-                            let data2 = draggingElem.children[1].getAttribute('data-answer')
-                            dropPlace.nextElementSibling.nextElementSibling.setAttribute('data-answer', data2)
-                            dropPlace.nextElementSibling.nextElementSibling.innerText = data2
-                            domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
-                            domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = data2
-                            domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
-                            domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = data2
+                                let data1 = draggingElem.children[0].getAttribute('data-answer')
+                                dropPlace.previousElementSibling.setAttribute('data-answer', data1)
+                                dropPlace.previousElementSibling.innerText = data1
+                                domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                                domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = data1
+                                domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                                domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = data1
+                                let data2 = draggingElem.children[1].getAttribute('data-answer')
+                                dropPlace.nextElementSibling.nextElementSibling.setAttribute('data-answer', data2)
+                                dropPlace.nextElementSibling.nextElementSibling.innerText = data2
+                                domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
+                                domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = data2
+                                domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
+                                domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = data2
+                            } else if (((dropPlace.getAttribute('data-answer') === draggingElem.children[0].getAttribute('data-answer')) ||
+                                    dropPlace.nextElementSibling.getAttribute('data-answer') === draggingElem.children[1].getAttribute('data-answer')) &&
+                                dominoCount > 0) {
+                                dropPlace.classList.add('cell_buzy')
+                                dropPlace.nextElementSibling.classList.add('cell_buzy')
+
+                                let data1 = draggingElem.children[0].getAttribute('data-answer')
+                                dropPlace.previousElementSibling.setAttribute('data-answer', data1)
+                                dropPlace.previousElementSibling.innerText = data1
+                                domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                                domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = data1
+                                domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                                domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = data1
+                                let data2 = draggingElem.children[1].getAttribute('data-answer')
+                                dropPlace.nextElementSibling.nextElementSibling.setAttribute('data-answer', data2)
+                                dropPlace.nextElementSibling.nextElementSibling.innerText = data2
+                                domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
+                                domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = data2
+                                domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
+                                domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = data2
+                            } else {
+                                returnDragingelement()
+                                return
+                            }
+
 
                         } else {
-                            dropPlace.classList.add('cell_buzy')
-                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].classList.add('cell_buzy')
+                            if ((dropPlace.getAttribute('data-answer') === draggingElem.children[0].getAttribute('data-answer')) ||
+                                domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].getAttribute('data-answer') === draggingElem.children[1].getAttribute('data-answer')) {
+                                dropPlace.classList.add('cell_buzy')
+                                domino_field.children[9 + +dropPlace.getAttribute('data-number')].classList.add('cell_buzy')
 
-                            let data1 = draggingElem.children[0].getAttribute('data-answer')
-                            dropPlace.previousElementSibling.setAttribute('data-answer', data1)
-                            dropPlace.previousElementSibling.innerText = data1
-                            domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
-                            domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = data1
-                            dropPlace.nextElementSibling.setAttribute('data-answer', data1)
-                            dropPlace.nextElementSibling.innerText = data1
-                            let data2 = draggingElem.children[1].getAttribute('data-answer')
-                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', data2)
-                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = data2
-                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', data2)
-                            domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = data2
-                            domino_field.children[19 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data2)
-                            domino_field.children[19 + +dropPlace.getAttribute('data-number')].innerText = data2
+                                let data1 = draggingElem.children[0].getAttribute('data-answer')
+                                dropPlace.previousElementSibling.setAttribute('data-answer', data1)
+                                dropPlace.previousElementSibling.innerText = data1
+                                domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data1)
+                                domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = data1
+                                dropPlace.nextElementSibling.setAttribute('data-answer', data1)
+                                dropPlace.nextElementSibling.innerText = data1
+                                let data2 = draggingElem.children[1].getAttribute('data-answer')
+                                domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', data2)
+                                domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = data2
+                                domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', data2)
+                                domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = data2
+                                domino_field.children[19 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data2)
+                                domino_field.children[19 + +dropPlace.getAttribute('data-number')].innerText = data2
+                            }
+
                         }
                     }
 
@@ -313,6 +344,7 @@
 
                 }
                 dropPlace.parentElement.appendChild(draggingElem);
+                dominoCount++
             } else {
                 returnDragingelement()
             }
@@ -326,14 +358,12 @@
                 if (draggingItem.classList.contains('domino_horizon')) {
                     elemBelow.nextElementSibling.classList.remove('cell_buzy')
                 } else {
-                    console.log(domino_field.children[9 + +elemBelow.getAttribute('data-number')])
                     domino_field.children[9 + +elemBelow.getAttribute('data-number')].classList.remove('cell_buzy')
                 }
             } else {
                 if (draggingItem.classList.contains('domino_horizon')) {
                     elemBelow.previousElementSibling.classList.remove('cell_buzy')
                 } else {
-                    console.log(domino_field.children[9 + +elemBelow.getAttribute('data-number')])
                     domino_field.children[-11 + +elemBelow.getAttribute('data-number')].classList.remove('cell_buzy')
                 }
             }
