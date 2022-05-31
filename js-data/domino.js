@@ -39,6 +39,26 @@
           }
       })*/
 
+    [...domino_field.children].forEach(item => {
+        let number = item.getAttribute('data-number')
+        if (number.length === 1) {
+            item.setAttribute('data-answer', 0)
+            item.classList.add('cell_edge')
+        }
+        if (+number % 10 === 0) {
+            item.setAttribute('data-answer', 0)
+            item.classList.add('cell_edge')
+        }
+        if ((+number - 1) % 10 === 0) {
+            item.setAttribute('data-answer', 0)
+            item.classList.add('cell_edge')
+        }
+        if (+number > 90 && +number <= 100) {
+            item.setAttribute('data-answer', 0)
+            item.classList.add('cell_edge')
+        }
+    })
+
 
     let draggingItem;
     let elemBelow;
@@ -263,7 +283,7 @@
                                     domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = data2
 
                                     if (dropPlace.previousElementSibling.classList.contains('cell_buzy')) {
-                                        dropPlace.previousElementSibling.previousElementSibling.setAttribute('data-number', 0)
+                                        dropPlace.previousElementSibling.previousElementSibling.setAttribute('data-answer', 0)
                                         dropPlace.previousElementSibling.previousElementSibling.innerText = '0'
 
                                         domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
@@ -281,13 +301,16 @@
 
                                     if (domino_field.children[-11 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
 
-                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-number', 0)
+                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = '0'
 
                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = '0'
 
-                                        dropPlace.previousElementSibling.setAttribute('data-number', 0)
+                                        domino_field.children[-21 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[-21 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+                                        dropPlace.previousElementSibling.setAttribute('data-answer', 0)
                                         dropPlace.previousElementSibling.innerText = '0'
 
                                         domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
@@ -296,10 +319,10 @@
 
                                     if (domino_field.children[9 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
 
-                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-number', 0)
+                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = '0'
 
-                                        dropPlace.previousElementSibling.setAttribute('data-number', 0)
+                                        dropPlace.previousElementSibling.setAttribute('data-answer', 0)
                                         dropPlace.previousElementSibling.innerText = '0'
 
                                         domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
@@ -307,6 +330,68 @@
 
                                         domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
                                         domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = '0'
+
+                                        domino_field.children[19 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[19 + +dropPlace.getAttribute('data-number')].innerText = '0'
+                                    }
+
+
+
+                                    if (dropPlace.nextElementSibling.nextElementSibling.classList.contains('cell_buzy')) {
+
+                                        dropPlace.nextElementSibling.nextElementSibling.nextElementSibling.setAttribute('data-answer', 0)
+                                        dropPlace.nextElementSibling.nextElementSibling.nextElementSibling.innerText = '0'
+
+                                        domino_field.children[-11 + +dropPlace.nextElementSibling.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[-11 + +dropPlace.nextElementSibling.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+
+                                    }
+
+                                    if (domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].classList.contains('cell_buzy')) {
+
+                                        domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        dropPlace.nextElementSibling.nextElementSibling.setAttribute('data-answer', 0)
+                                        dropPlace.nextElementSibling.nextElementSibling.innerText = '0'
+
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].nextElementSibling.innerText = '0'
+
+                                        domino_field.children[19 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[19 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+
+                                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = '0'
+                                    }
+
+                                    if (domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].classList.contains('cell_buzy')) {
+
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        dropPlace.nextElementSibling.nextElementSibling.setAttribute('data-answer', 0)
+                                        dropPlace.nextElementSibling.nextElementSibling.innerText = '0'
+
+                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+                                        domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                        domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].nextElementSibling.innerText = '0'
+
+                                        domino_field.children[-21 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[-21 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
                                     }
 
 
@@ -364,7 +449,6 @@
 
                                     if (dropPlace.previousElementSibling.classList.contains('cell_buzy')) {
 
-
                                         domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
                                         domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
 
@@ -374,39 +458,105 @@
                                         dropPlace.nextElementSibling.setAttribute('data-answer', 0)
                                         dropPlace.nextElementSibling.innerText = 0
 
+                                        dropPlace.previousElementSibling.previousElementSibling.setAttribute('data-answer', 0)
+                                        dropPlace.previousElementSibling.previousElementSibling.innerText = 0
+
                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = '0'
                                     }
 
-                                    /* if (domino_field.children[-11 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
+                                    if (domino_field.children[-11 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
 
-                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-number', 0)
-                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = '0'
+                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
+                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = '0'
 
-                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
-                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = '0'
+                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = '0'
 
-                                         dropPlace.previousElementSibling.setAttribute('data-number', 0)
-                                         dropPlace.previousElementSibling.innerText = '0'
+                                        dropPlace.previousElementSibling.setAttribute('data-answer', 0)
+                                        dropPlace.previousElementSibling.innerText = '0'
 
-                                         domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
-                                         domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = '0'
-                                     }
+                                        dropPlace.nextElementSibling.setAttribute('data-answer', 0)
+                                        dropPlace.nextElementSibling.innerText = '0'
 
-                                     if (domino_field.children[9 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
+                                        domino_field.children[-21 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[-21 + +dropPlace.getAttribute('data-number')].innerText = '0'
+                                    }
 
-                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-number', 0)
-                                         domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = '0'
+                                    if (dropPlace.nextElementSibling.classList.contains('cell_buzy')) {
 
-                                         dropPlace.previousElementSibling.setAttribute('data-number', 0)
-                                         dropPlace.previousElementSibling.innerText = '0'
+                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = '0'
 
-                                         domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
-                                         domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = '0'
+                                        dropPlace.previousElementSibling.setAttribute('data-answer', 0)
+                                        dropPlace.previousElementSibling.innerText = '0'
 
-                                         domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
-                                         domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = '0'
-                                     }*/
+                                        dropPlace.nextElementSibling.nextElementSibling.setAttribute('data-answer', 0)
+                                        dropPlace.nextElementSibling.nextElementSibling.innerText = '0'
+
+                                        domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = '0'
+                                    }
+
+
+                                    if (domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].classList.contains('cell_buzy')) {
+
+                                        domino_field.children[19 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[19 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        domino_field.children[19 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[19 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        domino_field.children[9 + +dropPlace.previousElementSibling.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.previousElementSibling.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        dropPlace.previousElementSibling.setAttribute('data-answer', 0)
+                                        dropPlace.previousElementSibling.innerText = 0
+                                    }
+
+                                    if (domino_field.children[19 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
+
+                                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = '0'
+
+                                        domino_field.children[19 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
+                                        domino_field.children[19 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = '0'
+
+                                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = '0'
+
+                                        domino_field.children[19 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                        domino_field.children[19 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = '0'
+
+                                        domino_field.children[29 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[29 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+
+                                    }
+
+                                    if (domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].classList.contains('cell_buzy')) {
+
+                                        domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[9 + +dropPlace.nextElementSibling.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        dropPlace.nextElementSibling.setAttribute('data-answer', 0)
+                                        dropPlace.nextElementSibling.innerText = '0'
+
+                                        domino_field.children[19 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[19 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                        domino_field.children[19 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                        domino_field.children[19 + +dropPlace.getAttribute('data-number')].innerText = '0'
+                                    }
 
                                 }
                             } else {
@@ -474,6 +624,111 @@
                                 domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = data2
                                 domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', data2)
                                 domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = data2
+
+
+                                if (dropPlace.nextElementSibling.classList.contains('cell_buzy')) {
+
+                                    dropPlace.nextElementSibling.nextElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.nextElementSibling.nextElementSibling.innerText = '0'
+
+                                    domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = '0'
+                                }
+                                if (domino_field.children[-11 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
+                                    dropPlace.nextElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.nextElementSibling.innerText = '0'
+
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+                                }
+                                if (domino_field.children[9 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
+                                    dropPlace.nextElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.nextElementSibling.innerText = '0'
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[19 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[19 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.nextElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                }
+
+                                if (dropPlace.previousElementSibling.previousElementSibling.classList.contains('cell_buzy')) {
+
+                                    dropPlace.previousElementSibling.previousElementSibling.previousElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.previousElementSibling.previousElementSibling.previousElementSibling.innerText = '0'
+
+                                    domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[-11 + +dropPlace.previousElementSibling.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.previousElementSibling.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[9 + +dropPlace.previousElementSibling.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.previousElementSibling.previousElementSibling.getAttribute('data-number')].innerText = '0'
+                                }
+                                if (domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].classList.contains('cell_buzy')) {
+                                    dropPlace.previousElementSibling.previousElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.previousElementSibling.previousElementSibling.innerText = '0'
+
+                                    domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[-21 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-21 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[-11 + +dropPlace.previousElementSibling.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.previousElementSibling.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                }
+                                if (domino_field.children[9 + +dropPlace.previousElementSibling.getAttribute('data-number')].classList.contains('cell_buzy')) {
+                                    dropPlace.previousElementSibling.previousElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.previousElementSibling.previousElementSibling.innerText = '0'
+
+                                    domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[19 + +dropPlace.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[19 + +dropPlace.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                    domino_field.children[9 + +dropPlace.previousElementSibling.previousElementSibling.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.previousElementSibling.previousElementSibling.getAttribute('data-number')].innerText = '0'
+
+                                }
                             }
 
                         } else {
@@ -529,6 +784,117 @@
                                 domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = data2
                                 domino_field.children[-21 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', data2)
                                 domino_field.children[-21 + +dropPlace.getAttribute('data-number')].innerText = data2
+
+                                if (domino_field.children[-21 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = 0
+
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = 0
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = 0
+
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = 0
+
+                                    domino_field.children[-31 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-31 + +dropPlace.getAttribute('data-number')].innerText = 0
+                                }
+
+                                if (domino_field.children[-11 + +dropPlace.nextElementSibling.getAttribute('data-number')].classList.contains('cell_buzy')) {
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = 0
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.nextElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.nextElementSibling.innerText = 0
+
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = 0
+
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].innerText = 0
+
+                                    dropPlace.nextElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.nextElementSibling.innerText = 0
+                                }
+
+                                if (domino_field.children[-11 + +dropPlace.previousElementSibling.getAttribute('data-number')].classList.contains('cell_buzy')) {
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = 0
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.previousElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.previousElementSibling.innerText = 0
+
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = 0
+
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[-21 + +dropPlace.getAttribute('data-number')].innerText = 0
+
+                                    dropPlace.previousElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.previousElementSibling.innerText = 0
+                                }
+
+                                if (dropPlace.previousElementSibling.classList.contains('cell_buzy')) {
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = 0
+
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = 0
+
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = 0
+
+                                    dropPlace.nextElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.nextElementSibling.innerText = 0
+
+                                    dropPlace.previousElementSibling.previousElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.previousElementSibling.previousElementSibling.innerText = 0
+                                }
+
+                                if (dropPlace.nextElementSibling.classList.contains('cell_buzy')) {
+
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[-11 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = 0
+
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].innerText = 0
+
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = 0
+
+                                    dropPlace.previousElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.previousElementSibling.innerText = 0
+
+                                    dropPlace.nextElementSibling.nextElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.nextElementSibling.nextElementSibling.innerText = 0
+                                }
+
+                                if (domino_field.children[9 + +dropPlace.getAttribute('data-number')].classList.contains('cell_buzy')) {
+
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].nextElementSibling.innerText = 0
+
+                                    dropPlace.previousElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.previousElementSibling.innerText = 0
+
+
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.setAttribute('data-answer', 0)
+                                    domino_field.children[9 + +dropPlace.getAttribute('data-number')].previousElementSibling.innerText = 0
+
+                                    dropPlace.nextElementSibling.setAttribute('data-answer', 0)
+                                    dropPlace.nextElementSibling.innerText = 0
+
+                                    domino_field.children[19 + +dropPlace.getAttribute('data-number')].setAttribute('data-answer', 0)
+                                    domino_field.children[19 + +dropPlace.getAttribute('data-number')].innerText = 0
+                                }
+
+
                             }
                         } else {
                             returnDragingelement()

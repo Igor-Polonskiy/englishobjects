@@ -37,10 +37,15 @@
 
 .domino_drag {
     display: flex;
-    height: 120px;
+    flex-wrap: wrap;
+    min-height: 120px;
     width: 100%;
 }
 
 .cell_buzy {
     background-color: bisque;
+}
+
+.cell_edge {
+    background-color: grey;
 }
