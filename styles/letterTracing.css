@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: 'Titillium Web';
-    src: url("/fonts/TitilliumWeb-Bold.ttf")
+    src: url("../fonts/TitilliumWeb-Bold.ttf")
 }
 
 .letter_wrapper {

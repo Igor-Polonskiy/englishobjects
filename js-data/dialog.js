@@ -86,9 +86,9 @@
         }
     })
 
-    drop.addEventListener('click', resetPuzzle);
+    drop.addEventListener('click', resetTask);
 
-    function resetPuzzle() {
+    function resetTask() {
         dialog.innerHTML = ''
         answers.innerHTML = ''
         stage = 0
@@ -127,7 +127,7 @@
         close.style.height = '25px'
         close.style.marginLeft = 'calc(100% - 25px)'
         close.style.cursor = 'pointer'
-        close.style.backgroundImage = `url(Images_18/close.png)`
+        close.style.backgroundImage = `url(Images_18/common/close.png)`
         div.append(close)
         document.body.style.overflow = 'hidden'
         modal.addEventListener('click', () => {
