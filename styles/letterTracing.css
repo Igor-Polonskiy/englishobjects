@@ -59,6 +59,10 @@
     box-shadow: -5px -5px 15px #b8b7b7, 5px 5px 15px #99999b;
 }
 
+.letter_audio {
+    display: none !important;
+}
+
 @media(max-width: 1200px) {
     .letter_img {
         flex-direction: column;
