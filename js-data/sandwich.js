@@ -57,7 +57,7 @@
 
     const drop = headCheck.querySelector('.drop');
     const check_your = headCheck.querySelector('.check_your');
-    const result = headCheck.querySelector('.result');
+
     let shiftX
     let shiftY
     let offset = 0
@@ -103,28 +103,29 @@
     function mouseDown(event) {
         if (event.button === 2) return;
         if (event.target.classList.contains('sandwich_pic')) {
+
             draggingItem = document.createElement('div')
             draggingItem.classList.add('sandwich_pic_dropped')
             draggingItem.style.backgroundImage = `url(${pictures[+event.target.getAttribute('data-id')-1].src})`
 
-
             //draggingItem = event.target;
+            document.body.appendChild(draggingItem);
             draggingItem.style.touchAction = 'none'; //ОБЯЗАТЕЛЬНОЕ УСЛОВИЕ(МОЖНО УБРАТЬ И ПРОПИСАТЬ В СТИЛЬ САМОМУ ОБЪЕКТУ) 
             draggingItem.style.cursor = 'grabbing';
             draggingItem.style.position = 'absolute';
             draggingItem.style.zIndex = 100;
 
-            document.body.appendChild(draggingItem);
+
             shiftX = event.clientX - event.target.getBoundingClientRect().left;
             shiftY = event.clientY - event.target.getBoundingClientRect().top;
             moveAt(event.pageX, event.pageY);
+
         }
         if (event.target.classList.contains('sandwich_pic_dropped')) {
             draggingItem = event.target
 
             draggingItem.style.touchAction = 'none'; //ОБЯЗАТЕЛЬНОЕ УСЛОВИЕ(МОЖНО УБРАТЬ И ПРОПИСАТЬ В СТИЛЬ САМОМУ ОБЪЕКТУ) 
             draggingItem.style.cursor = "grabbing";
-
             draggingItem.style.position = "absolute";
             draggingItem.style.zIndex = 100;
 
@@ -133,6 +134,7 @@
             moveAt(event.pageX, event.pageY);
             document.body.append(draggingItem);
         }
+
 
 
 
@@ -164,6 +166,7 @@
                 x: limits.left,
                 y: limits.top
             };
+
             if (event.pageX > limits.right) {
                 newLocation.x = limits.right;
             } else if (event.pageX > limits.left) {
@@ -175,9 +178,11 @@
                 newLocation.y = event.pageY;
             }
 
-            clickWithoutMove = false
+
             moveAt(newLocation.x, newLocation.y);
 
+
+            clickWithoutMove = false
             if (event.path[0] !== draggingItem) {
                 window.addEventListener('pointerup', moveOut);
             }
@@ -228,22 +233,26 @@
         }
         // КОГДА КУРСОР В ЗОНЕ ДЛЯ ПЕРЕТАСКИВАНИЙ И ПОЛЬЗОВАТЕЛЬ ОТПУСТИЛ ЗАХВАТ ЭЛЕМЕНТА
         draggingItem.onpointerup = function() {
+
             draggingItem.style.cursor = 'grab';
             startAction = true;
             checkButton_classList_changer();
             if (clickWithoutMove) {
-                changeStylesAndAppend(dragField, draggingItem);
-            }
-            document.removeEventListener('pointermove', onMouseMove);
+                //changeStylesAndAppend(dragField, draggingItem);
 
+            }
+
+            document.removeEventListener('pointermove', onMouseMove);
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
             //
             if (elemBelow.closest(".sandwich_drop") || elemBelow.classList.contains('sandwich_drop')) {
                 elemBelow = elemBelow.closest(".sandwich_drop")
                 changeStylesAndAppend(elemBelow, draggingItem);
+
             } else {
                 draggingItem.remove()
             }
+
         };
 
         function changeStylesAndAppend(dropPlace, draggingElem) {

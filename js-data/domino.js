@@ -66,7 +66,7 @@
     let dominoCount = 0
 
 
-    task.addEventListener('pointerdown', draggingListner);
+    dragzone.addEventListener('pointerdown', draggingListner);
 
     function draggingListner(e) {
         if (e.target.classList.contains('domino_half')) {
@@ -98,16 +98,14 @@
             left: interakt_zadanie.offsetLeft
         };
 
-        draggingItem.style.position = 'absolute';
-        draggingItem.style.zIndex = 1000;
-        document.body.appendChild(draggingItem);
 
-        moveAt(event.pageX, event.pageY);
 
         function moveAt(pageX, pageY) {
             draggingItem.style.left = pageX - shiftX + 'px';
             draggingItem.style.top = pageY - shiftY + 'px';
         }
+
+
 
         elemBelow = document.elementFromPoint(event.clientX, event.clientY);
         draggingItem.style.visibility = 'hidden'
@@ -119,6 +117,12 @@
         deleteBuzy(elemBelow)
 
         function onMouseMove(event) {
+
+            draggingItem.style.position = 'absolute';
+            draggingItem.style.zIndex = 1000;
+            document.body.appendChild(draggingItem);
+
+            moveAt(event.pageX, event.pageY);
             let newLocation = {
                 x: limits.left,
                 y: limits.top
@@ -200,7 +204,9 @@
                 // checkButton_classList_changer();
                 if (clickWithoutMove) {
                     //changeStylesAndAppend(dragzone, draggingItem);
-
+                    flipDomino(draggingItem)
+                    document.removeEventListener('pointermove', onMouseMove);
+                    return
                 }
                 document.removeEventListener('pointermove', onMouseMove);
 
@@ -930,6 +936,20 @@
             }
         }
 
+    }
+
+    function flipDomino(domino) {
+        if (!domino.classList.contains('domino_horizon')) {
+            // domino.style.transform = 'rotate(90deg)'
+            let temp = domino.children[0].getAttribute('data-answer')
+            domino.children[0].setAttribute('data-answer', domino.children[1].getAttribute('data-answer'))
+            domino.children[1].setAttribute('data-answer', temp)
+            let temp2 = domino.children[0].innerText
+            domino.children[0].innerText = domino.children[1].innerText
+            domino.children[1].innerText = temp2
+        }
+        domino.style.transform = 'rotate(90deg)'
+        domino.classList.toggle('domino_horizon')
     }
 
 

@@ -15,6 +15,15 @@
     border: 1px solid grey;
     flex-direction: column;
     box-sizing: border-box;
+    transition: transform 0.3s;
+}
+
+.domino_drag>.domino {
+    margin: 0 25px;
+}
+
+.domino_drag>.domino_horizon {
+    margin: 0;
 }
 
 .domino_horizon {
@@ -37,9 +46,10 @@
 
 .domino_drag {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    min-height: 120px;
-    width: 100%;
+    width: 500px;
+    min-height: 220px;
 }
 
 .cell_buzy {
