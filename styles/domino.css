@@ -1,3 +1,7 @@
+.domino_game {
+    user-select: none;
+}
+
 .domino_drop {
     width: 500px;
     height: 500px;
@@ -15,7 +19,7 @@
     border: 1px solid grey;
     flex-direction: column;
     box-sizing: border-box;
-    transition: transform 0.3s;
+    border-radius: 5px
 }
 
 .domino_drag>.domino {
@@ -38,6 +42,14 @@
     justify-content: center;
     width: 48px;
     height: 48px;
+    border: 1px solid rgb(54, 155, 210);
+    box-sizing: border-box
+}
+
+.domino_half>img {
+    max-width: 95%;
+    max-height: 95%;
+    z-index: -1;
 }
 
 .domino_cell {
