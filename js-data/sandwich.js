@@ -104,21 +104,22 @@
         if (event.button === 2) return;
         if (event.target.classList.contains('sandwich_pic')) {
 
-            draggingItem = document.createElement('div')
-            draggingItem.classList.add('sandwich_pic_dropped')
-            draggingItem.style.backgroundImage = `url(${pictures[+event.target.getAttribute('data-id')-1].src})`
+            let newItem = document.createElement('div')
+            newItem.classList.add('sandwich_pic_dropped')
+            newItem.style.backgroundImage = `url(${pictures[+event.target.getAttribute('data-id')-1].src})`
 
             //draggingItem = event.target;
-            document.body.appendChild(draggingItem);
-            draggingItem.style.touchAction = 'none'; //ОБЯЗАТЕЛЬНОЕ УСЛОВИЕ(МОЖНО УБРАТЬ И ПРОПИСАТЬ В СТИЛЬ САМОМУ ОБЪЕКТУ) 
-            draggingItem.style.cursor = 'grabbing';
-            draggingItem.style.position = 'absolute';
-            draggingItem.style.zIndex = 100;
+            dropField.append(newItem);
+            newItem.style.touchAction = 'none'; //ОБЯЗАТЕЛЬНОЕ УСЛОВИЕ(МОЖНО УБРАТЬ И ПРОПИСАТЬ В СТИЛЬ САМОМУ ОБЪЕКТУ) 
+            newItem.style.cursor = 'grabbing';
+            newItem.style.position = 'absolute';
+            newItem.style.zIndex = 100;
 
-
+            draggingItem = newItem
             shiftX = event.clientX - event.target.getBoundingClientRect().left;
             shiftY = event.clientY - event.target.getBoundingClientRect().top;
             moveAt(event.pageX, event.pageY);
+
 
         }
         if (event.target.classList.contains('sandwich_pic_dropped')) {
@@ -132,7 +133,8 @@
             shiftX = event.clientX - draggingItem.getBoundingClientRect().left;
             shiftY = event.clientY - draggingItem.getBoundingClientRect().top;
             moveAt(event.pageX, event.pageY);
-            document.body.append(draggingItem);
+            dropField.append(draggingItem);
+
         }
 
 
@@ -147,14 +149,10 @@
             left: interakt_zadanie.offsetLeft
         };
 
-
-
-
-
-
         function moveAt(pageX, pageY) {
             draggingItem.style.left = pageX - shiftX + 'px';
             draggingItem.style.top = pageY - shiftY + 'px';
+
         }
 
         elemBelow = document.elementFromPoint(event.clientX, event.clientY);
@@ -181,16 +179,17 @@
 
             moveAt(newLocation.x, newLocation.y);
 
-
             clickWithoutMove = false
+
             if (event.path[0] !== draggingItem) {
                 window.addEventListener('pointerup', moveOut);
             }
+
             draggingItem.style.visibility = 'hidden'
             elemBelow = document.elementFromPoint(event.clientX, event.clientY);
-
             draggingItem.style.visibility = 'visible';
             if (!elemBelow) return;
+
 
             // ОБРАБОТКА СОБЫТИЯ НАХОЖДЕНИЯ НАД БЛОКОМ И ВЫЛЕТА ИЗ НЕГО (ПО НЕОБХОДИМИОСТИ)
 
@@ -219,7 +218,9 @@
         function leaveDroppable(currentDroppable) {
             // currentDroppable
         }
+
         document.addEventListener('pointermove', onMouseMove);
+        task.addEventListener('pointerup', onpointerup)
 
 
         // КОГДА ВО ВРЕМЯ ПЕРЕТАСКИВАНИЯ КУРСОР ВЫНЕСЛИ ЗА ПРЕДЕЛЫ ОКНА БРАУЗЕРА И ОТПУСТИЛИ ЗАХВАТ ЭЛЕМЕНТА
@@ -232,28 +233,60 @@
             document.removeEventListener('pointermove', onMouseMove);
         }
         // КОГДА КУРСОР В ЗОНЕ ДЛЯ ПЕРЕТАСКИВАНИЙ И ПОЛЬЗОВАТЕЛЬ ОТПУСТИЛ ЗАХВАТ ЭЛЕМЕНТА
-        draggingItem.onpointerup = function() {
+        console.log(draggingItem)
 
+        function onpointerup() {
+            console.log('onpointerup')
             draggingItem.style.cursor = 'grab';
             startAction = true;
             checkButton_classList_changer();
             if (clickWithoutMove) {
                 //changeStylesAndAppend(dragField, draggingItem);
+                console.log('clickWithoutMove')
 
+                draggingItem.remove()
             }
 
             document.removeEventListener('pointermove', onMouseMove);
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
             //
             if (elemBelow.closest(".sandwich_drop") || elemBelow.classList.contains('sandwich_drop')) {
+                console.log(elemBelow)
                 elemBelow = elemBelow.closest(".sandwich_drop")
                 changeStylesAndAppend(elemBelow, draggingItem);
 
             } else {
+                console.log('remove')
                 draggingItem.remove()
             }
+            task.removeEventListener('pointerup', onpointerup)
+        }
+        /* draggingItem.onpointerup = function() {
+             console.log('onpointerup')
+             draggingItem.style.cursor = 'grab';
+             startAction = true;
+             checkButton_classList_changer();
+             if (clickWithoutMove) {
+                 //changeStylesAndAppend(dragField, draggingItem);
+                 console.log('clickWithoutMove')
 
-        };
+                 draggingItem.remove()
+             }
+
+             document.removeEventListener('pointermove', onMouseMove);
+             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
+             //
+             if (elemBelow.closest(".sandwich_drop") || elemBelow.classList.contains('sandwich_drop')) {
+                 console.log(elemBelow)
+                 elemBelow = elemBelow.closest(".sandwich_drop")
+                 changeStylesAndAppend(elemBelow, draggingItem);
+
+             } else {
+                 console.log('remove')
+                 draggingItem.remove()
+             }
+
+         };*/
 
         function changeStylesAndAppend(dropPlace, draggingElem) {
             if (dropPlace === dropField) {

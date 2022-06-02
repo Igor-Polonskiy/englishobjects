@@ -46,6 +46,7 @@
         box-shadow: -5px -5px 15px #ffffff, 5px 5px 10px #cbcdd3;
         font-size: 30px;
         cursor: grab;
+        touch-action: none;
     }
     
     .letters_task_dropItem {

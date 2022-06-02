@@ -119,7 +119,7 @@
             draggingItem.style.position = 'absolute';
             draggingItem.style.zIndex = 100;
 
-            document.body.append(draggingItem);
+            task.append(draggingItem);
             shiftX = event.clientX - event.target.getBoundingClientRect().left;
             shiftY = event.clientY - event.target.getBoundingClientRect().top;
             moveAt(event.pageX, event.pageY);
@@ -136,7 +136,7 @@
             shiftX = event.clientX - draggingItem.getBoundingClientRect().left;
             shiftY = event.clientY - draggingItem.getBoundingClientRect().top;
             moveAt(event.pageX, event.pageY);
-            document.body.append(draggingItem);
+            task.append(draggingItem);
         }
 
 
@@ -215,6 +215,7 @@
             // currentDroppable
         }
         document.addEventListener('pointermove', onMouseMove);
+        task.addEventListener('pointerup', onpointerup)
 
 
         // КОГДА ВО ВРЕМЯ ПЕРЕТАСКИВАНИЯ КУРСОР ВЫНЕСЛИ ЗА ПРЕДЕЛЫ ОКНА БРАУЗЕРА И ОТПУСТИЛИ ЗАХВАТ ЭЛЕМЕНТА
@@ -227,25 +228,29 @@
             document.removeEventListener('pointermove', onMouseMove);
         }
         // КОГДА КУРСОР В ЗОНЕ ДЛЯ ПЕРЕТАСКИВАНИЙ И ПОЛЬЗОВАТЕЛЬ ОТПУСТИЛ ЗАХВАТ ЭЛЕМЕНТА
-        draggingItem.onpointerup = function() {
+
+        function onpointerup() {
             draggingItem.style.cursor = 'grab';
             startAction = true;
             //checkButton_classList_changer();
             if (clickWithoutMove) {
-                changeStylesAndAppend(dragZone, draggingItem);
+                //changeStylesAndAppend(dragField, draggingItem);
+                // draggingItem.remove()
             }
-            document.removeEventListener('pointermove', onMouseMove);
 
+            document.removeEventListener('pointermove', onMouseMove);
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
             //
-            if (elemBelow.classList.contains('letters_task_dropItem') && elemBelow.children.length === 0) {
+            if (elemBelow.closest(".letters_task_dropItem") && elemBelow.children.length === 0) {
                 elemBelow = elemBelow.closest(".letters_task_dropItem")
                 changeStylesAndAppend(elemBelow, draggingItem);
                 checkAnswer()
             } else {
+                console.log('remove')
                 draggingItem.remove()
             }
-        };
+            task.removeEventListener('pointerup', onpointerup)
+        }
 
         function changeStylesAndAppend(dropPlace, draggingElem) {
             draggingElem.style.position = 'relative ';

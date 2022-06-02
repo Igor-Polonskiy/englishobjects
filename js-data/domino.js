@@ -949,6 +949,7 @@
             domino.children[1].innerText = temp2
         }
         domino.style.transform = 'rotate(90deg)'
+        domino
         domino.classList.toggle('domino_horizon')
     }
 

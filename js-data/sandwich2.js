@@ -109,7 +109,7 @@
             draggingItem.style.position = 'absolute';
             draggingItem.style.zIndex = 100;
 
-            document.body.appendChild(draggingItem);
+            dropField.append(draggingItem);
             shiftX = event.clientX - event.target.getBoundingClientRect().left;
             shiftY = event.clientY - event.target.getBoundingClientRect().top;
             moveAt(event.pageX, event.pageY);
@@ -126,7 +126,7 @@
             shiftX = event.clientX - draggingItem.getBoundingClientRect().left;
             shiftY = event.clientY - draggingItem.getBoundingClientRect().top;
             moveAt(event.pageX, event.pageY);
-            document.body.append(draggingItem);
+            dropField.append(draggingItem);
         }
 
 
@@ -210,7 +210,7 @@
             // currentDroppable
         }
         document.addEventListener('pointermove', onMouseMove);
-
+        task.addEventListener('pointerup', onpointerup)
 
         // КОГДА ВО ВРЕМЯ ПЕРЕТАСКИВАНИЯ КУРСОР ВЫНЕСЛИ ЗА ПРЕДЕЛЫ ОКНА БРАУЗЕРА И ОТПУСТИЛИ ЗАХВАТ ЭЛЕМЕНТА
         /* function moveOut(e) {
@@ -227,8 +227,32 @@
             document.removeEventListener('pointermove', onMouseMove);
         }
 
+        function onpointerup() {
+            draggingItem.style.cursor = 'grab';
+            startAction = true;
+            checkButton_classList_changer();
+            if (clickWithoutMove) {
+                //changeStylesAndAppend(dragField, draggingItem);
+                // draggingItem.remove()
+            }
+
+            document.removeEventListener('pointermove', onMouseMove);
+            // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
+            //
+            if (elemBelow.closest(".sandwich2_drop") || elemBelow.classList.contains('sandwich2_drop')) {
+                console.log(elemBelow)
+                elemBelow = elemBelow.closest(".sandwich2_drop")
+                changeStylesAndAppend(elemBelow, draggingItem);
+
+            } else {
+                console.log('remove')
+                draggingItem.remove()
+            }
+            task.removeEventListener('pointerup', onpointerup)
+        }
         // КОГДА КУРСОР В ЗОНЕ ДЛЯ ПЕРЕТАСКИВАНИЙ И ПОЛЬЗОВАТЕЛЬ ОТПУСТИЛ ЗАХВАТ ЭЛЕМЕНТА
-        draggingItem.onpointerup = function() {
+        /*draggingItem.onpointerup = function() {
+            console.log('onpointerup')
             draggingItem.style.cursor = 'grab';
             startAction = true;
             checkButton_classList_changer();
@@ -245,7 +269,7 @@
             } else {
                 draggingItem.remove()
             }
-        };
+        };*/
 
         function changeStylesAndAppend(dropPlace, draggingElem) {
             if (dropPlace === dropField) {
