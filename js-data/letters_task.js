@@ -241,12 +241,11 @@
             document.removeEventListener('pointermove', onMouseMove);
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
             //
-            if (elemBelow.closest(".letters_task_dropItem") && elemBelow.children.length === 0) {
+            if (elemBelow && elemBelow.closest(".letters_task_dropItem") && elemBelow.closest(".letters_task_dropItem").children.length === 0) {
                 elemBelow = elemBelow.closest(".letters_task_dropItem")
                 changeStylesAndAppend(elemBelow, draggingItem);
                 checkAnswer()
             } else {
-                console.log('remove')
                 draggingItem.remove()
             }
             task.removeEventListener('pointerup', onpointerup)

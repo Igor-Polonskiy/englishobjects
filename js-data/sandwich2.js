@@ -239,13 +239,12 @@
             document.removeEventListener('pointermove', onMouseMove);
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
             //
-            if (elemBelow.closest(".sandwich2_drop") || elemBelow.classList.contains('sandwich2_drop')) {
-                console.log(elemBelow)
+            if (elemBelow && elemBelow.closest(".sandwich2_drop") || elemBelow.classList.contains('sandwich2_drop')) {
                 elemBelow = elemBelow.closest(".sandwich2_drop")
+
                 changeStylesAndAppend(elemBelow, draggingItem);
 
             } else {
-                console.log('remove')
                 draggingItem.remove()
             }
             task.removeEventListener('pointerup', onpointerup)

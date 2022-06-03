@@ -233,30 +233,24 @@
             document.removeEventListener('pointermove', onMouseMove);
         }
         // КОГДА КУРСОР В ЗОНЕ ДЛЯ ПЕРЕТАСКИВАНИЙ И ПОЛЬЗОВАТЕЛЬ ОТПУСТИЛ ЗАХВАТ ЭЛЕМЕНТА
-        console.log(draggingItem)
 
         function onpointerup() {
-            console.log('onpointerup')
             draggingItem.style.cursor = 'grab';
             startAction = true;
             checkButton_classList_changer();
             if (clickWithoutMove) {
                 //changeStylesAndAppend(dragField, draggingItem);
-                console.log('clickWithoutMove')
-
-                draggingItem.remove()
+                // draggingItem.remove()
             }
 
             document.removeEventListener('pointermove', onMouseMove);
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
             //
-            if (elemBelow.closest(".sandwich_drop") || elemBelow.classList.contains('sandwich_drop')) {
-                console.log(elemBelow)
+            if (elemBelow && elemBelow.closest(".sandwich_drop") || elemBelow.classList.contains('sandwich_drop')) {
                 elemBelow = elemBelow.closest(".sandwich_drop")
                 changeStylesAndAppend(elemBelow, draggingItem);
 
             } else {
-                console.log('remove')
                 draggingItem.remove()
             }
             task.removeEventListener('pointerup', onpointerup)
