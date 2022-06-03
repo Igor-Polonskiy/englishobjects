@@ -107,8 +107,7 @@
             let newItem = document.createElement('div')
             newItem.classList.add('sandwich_pic_dropped')
             newItem.style.backgroundImage = `url(${pictures[+event.target.getAttribute('data-id')-1].src})`
-
-            //draggingItem = event.target;
+                //draggingItem = event.target;
             dropField.append(newItem);
             newItem.style.touchAction = 'none'; //ОБЯЗАТЕЛЬНОЕ УСЛОВИЕ(МОЖНО УБРАТЬ И ПРОПИСАТЬ В СТИЛЬ САМОМУ ОБЪЕКТУ) 
             newItem.style.cursor = 'grabbing';
@@ -246,10 +245,14 @@
             document.removeEventListener('pointermove', onMouseMove);
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
             //
-            if (elemBelow && elemBelow.closest(".sandwich_drop") || elemBelow.classList.contains('sandwich_drop')) {
-                elemBelow = elemBelow.closest(".sandwich_drop")
-                changeStylesAndAppend(elemBelow, draggingItem);
+            if (elemBelow) {
+                if (elemBelow.closest(".sandwich_drop") || elemBelow.classList.contains('sandwich_drop')) {
+                    elemBelow = elemBelow.closest(".sandwich_drop")
+                    changeStylesAndAppend(elemBelow, draggingItem);
 
+                } else {
+                    draggingItem.remove()
+                }
             } else {
                 draggingItem.remove()
             }

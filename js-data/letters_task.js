@@ -240,11 +240,14 @@
 
             document.removeEventListener('pointermove', onMouseMove);
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
-            //
-            if (elemBelow && elemBelow.closest(".letters_task_dropItem") && elemBelow.closest(".letters_task_dropItem").children.length === 0) {
-                elemBelow = elemBelow.closest(".letters_task_dropItem")
-                changeStylesAndAppend(elemBelow, draggingItem);
-                checkAnswer()
+            if (elemBelow) {
+                if (elemBelow.closest(".letters_task_dropItem") && elemBelow.closest(".letters_task_dropItem").children.length === 0) {
+                    elemBelow = elemBelow.closest(".letters_task_dropItem")
+                    changeStylesAndAppend(elemBelow, draggingItem);
+                    checkAnswer()
+                } else {
+                    draggingItem.remove()
+                }
             } else {
                 draggingItem.remove()
             }

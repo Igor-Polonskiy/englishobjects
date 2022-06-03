@@ -239,11 +239,15 @@
             document.removeEventListener('pointermove', onMouseMove);
             // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
             //
-            if (elemBelow && elemBelow.closest(".sandwich2_drop") || elemBelow.classList.contains('sandwich2_drop')) {
-                elemBelow = elemBelow.closest(".sandwich2_drop")
+            if (elemBelow) {
+                if (elemBelow.closest(".sandwich2_drop") || elemBelow.classList.contains('sandwich2_drop')) {
+                    elemBelow = elemBelow.closest(".sandwich2_drop")
 
-                changeStylesAndAppend(elemBelow, draggingItem);
+                    changeStylesAndAppend(elemBelow, draggingItem);
 
+                } else {
+                    draggingItem.remove()
+                }
             } else {
                 draggingItem.remove()
             }
