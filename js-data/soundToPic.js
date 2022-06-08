@@ -5,7 +5,8 @@
     const dragzone = task.querySelector('.soundToPic_dragzone')
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
-    const audios = task.querySelectorAll('.soundToPic_audio')
+    const audioWrapper = task.querySelector('.soundToPic_audio_wrapper')
+        //const audios = task.querySelectorAll('.soundToPic_audio')
 
     const drop = headCheck.querySelector('.drop');
     const check_your = headCheck.querySelector('.check_your');
@@ -18,32 +19,33 @@
     const pictures = [{
             id: 1,
             data: 'Images_18/soundToPic/Eng-2021_2_1_1_19.png',
+            sound: "sound/soundToPic/028.mp3"
 
         },
         {
             id: 2,
             data: 'Images_18/soundToPic/Eng-2021_2_1_1_20.png',
-
+            sound: "sound/soundToPic/029.mp3"
         },
         {
             id: 3,
             data: 'Images_18/soundToPic/Eng-2021_2_1_1_21.png',
-
+            sound: "sound/soundToPic/030.mp3"
         },
         {
             id: 4,
             data: 'Images_18/soundToPic/Eng-2021_2_1_1_22.png',
-
+            sound: "sound/soundToPic/031.mp3"
         },
         {
             id: 5,
             data: 'Images_18/soundToPic/Eng-2021_2_1_1_23.png',
-
+            sound: "sound/soundToPic/032.mp3"
         },
         {
             id: 6,
             data: 'Images_18/soundToPic/Eng-2021_2_1_1_24.png',
-
+            sound: "sound/soundToPic/033.mp3"
         }
     ]
 
@@ -70,21 +72,24 @@
 
     function insertAudio(arr) {
         shuffleArr(arr).forEach(item => {
+            let audioTag = document.createElement('audio')
+            audioTag.src = item.sound
+            audioTag.classList.add('soundToPic_drop')
+            audioWrapper.append(audioTag)
             let audio = document.createElement('div')
             audio.classList.add('soundToPic_dragitem')
             audio.setAttribute('data-id', item.id)
             let btn = document.createElement('button')
             btn.style.backgroundImage = `url(Images_18/soundToPic/sound.png)`
             audio.addEventListener('click', (e) => {
-                audios[item.id - 1].addEventListener('ended', (event) => {
+                audioTag.addEventListener('ended', (event) => {
                     e.target.classList.remove('soundToPic_active')
                 })
-                audios[item.id - 1].play()
+                audioTag.play()
                 e.target.classList.add('soundToPic_active')
                 e.stopPropagation();
             })
             audio.append(btn)
-
             dragzone.append(audio)
         })
     }

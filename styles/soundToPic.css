@@ -84,6 +84,10 @@
     display: none !important;
 }
 
+.soundToPic_audio_wrapper {
+    display: none;
+}
+
 @media(max-width: 1250px) {
     .soundToPic_dropzone {
         width: 600px;
