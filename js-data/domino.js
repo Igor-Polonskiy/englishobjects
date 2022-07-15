@@ -209,24 +209,45 @@
 
                 // ЛОГИКА ОБРАБОТКИ ПОПАДАНИЯ НА НУЖНЫЙ БЛОК И НАОБОРОТ
                 if (elemBelow.classList.contains('domino_cell')) {
-
+                    //smoothTransition()
                     changeStylesAndAppend(elemBelow, draggingItem);
                 } else {
-                    changeStylesAndAppend(dragzone, draggingItem);
+                    //smoothTransition(draggingItem)
+                    changeStylesAndAppend(dragzone, draggingItem)
+
                 }
             }
 
             draggingItem = null
         };
 
+        function smoothTransition(draggingElem) {
+            let coordX,
+                coordY
+
+            draggingElem.classList.add('dragTransition')
+            coordX = dragzone.getBoundingClientRect().left + dragzone.getBoundingClientRect().width / 2
+            coordY = dragzone.getBoundingClientRect().top + dragzone.getBoundingClientRect().height / 2 + window.pageYOffset
+            console.log(coordX, coordY)
+            draggingElem.style.left = `${coordX}px`
+            draggingElem.style.top = `${coordY}px`
+            console.log(draggingItem.style.left, window.pageYOffset)
+            setTimeout(() => { draggingElem.classList.remove('dragTransition') }, 1000)
+        }
+
 
         function changeStylesAndAppend(dropPlace, draggingElem) {
             function returnDragingelement() {
-                draggingElem.style.position = 'relative ';
-                draggingElem.style.zIndex = null;
-                draggingElem.style.top = null;
-                draggingElem.style.left = null;
-                dragzone.append(draggingElem);
+                smoothTransition(draggingElem)
+                setTimeout(() => {
+                    draggingElem.style.position = 'relative ';
+                    draggingElem.style.zIndex = null;
+                    draggingElem.style.top = null;
+                    draggingElem.style.left = null;
+                    dragzone.append(draggingElem);
+                }, 1000)
+                console.log('return')
+
             }
 
             if (dropPlace !== dragzone) {
@@ -730,7 +751,7 @@
                         }
                     }
                 }
-                dropPlace.parentElement.appendChild(draggingElem);
+                dropPlace.parentElement.append(draggingElem);
                 dominoCount++
             } else {
                 returnDragingelement()

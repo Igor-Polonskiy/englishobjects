@@ -123,6 +123,14 @@
         document.body.append(modal)
     }
 
+    function stopClick(e) {
+        if (e.target.classList.contains('wordsToPic_dragitem')) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+
+    }
+
 
     let draggingItem;
     let elemBelow;
@@ -189,9 +197,13 @@
             clickWithoutMove = false
             moveAt(newLocation.x, newLocation.y);
 
-            if (event.path[0] !== draggingItem) {
+            if (!event.path.includes(draggingItem)) {
                 window.addEventListener('pointerup', moveOut);
             }
+            if (event.path.includes(draggingItem)) {
+                window.removeEventListener('pointerup', moveOut);
+            }
+
             draggingItem.style.visibility = 'hidden'
             elemBelow = document.elementFromPoint(event.clientX, event.clientY);
             draggingItem.style.visibility = 'visible';
@@ -234,21 +246,21 @@
              document.removeEventListener('pointermove', onMouseMove);
          }*/
         function moveOut(e) {
-            const elemUnderPount = document.elementFromPoint(e.clientX, e.clientY);
-            if (elemUnderPount !== draggingItem) {
-                changeStylesAndAppend(dragzone, draggingItem);
-            }
+            smoothTransition(draggingItem)
+            setTimeout(() => changeStylesAndAppend(dragzone, draggingItem), 1000)
             window.removeEventListener('pointerup', moveOut);
             document.removeEventListener('pointermove', onMouseMove);
         }
 
         // КОГДА КУРСОР В ЗОНЕ ДЛЯ ПЕРЕТАСКИВАНИЙ И ПОЛЬЗОВАТЕЛЬ ОТПУСТИЛ ЗАХВАТ ЭЛЕМЕНТА
         draggingItem.onpointerup = function() {
+
             draggingItem.style.cursor = 'grab';
             startAction = true;
             checkButton_classList_changer();
             if (clickWithoutMove) {
-                //changeStylesAndAppend(dragzone, draggingItem);
+                // changeStylesAndAppend(dropzone, draggingItem);
+
             }
             document.removeEventListener('pointermove', onMouseMove);
 
@@ -256,9 +268,32 @@
             if (elemBelow.classList.contains('wordsToPic_drop') && elemBelow.children.length === 0) {
                 changeStylesAndAppend(elemBelow, draggingItem);
             } else {
-                changeStylesAndAppend(dragzone, draggingItem);
+                task.removeEventListener('pointerdown', draggingListner);
+                smoothTransition(draggingItem)
+                setTimeout(() => {
+                    changeStylesAndAppend(dragzone, draggingItem)
+                    task.addEventListener('pointerdown', draggingListner);
+                }, 1000)
+
             }
         };
+
+        function smoothTransition(draggingElem) {
+            document.body.style.pointerEvents = 'none'
+            let coordX,
+                coordY
+
+            draggingElem.classList.add('dragTransition')
+            coordX = dragzone.getBoundingClientRect().left + dragzone.getBoundingClientRect().width / 2
+            coordY = dragzone.getBoundingClientRect().top + dragzone.getBoundingClientRect().height / 2 + window.pageYOffset
+            draggingElem.style.left = `${coordX}px`
+            draggingElem.style.top = `${coordY}px`
+            setTimeout(() => {
+                draggingElem.classList.remove('dragTransition')
+                document.body.style.pointerEvents = 'auto'
+
+            }, 1000)
+        }
 
         function changeStylesAndAppend(dropPlace, draggingElem) {
             draggingElem.style.position = 'relative ';

@@ -71,3 +71,7 @@
 .cell_edge {
     background-color: grey;
 }
+
+.dragTransition {
+    transition: all 1s;
+}
