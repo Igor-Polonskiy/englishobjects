@@ -323,8 +323,8 @@
         win.style.fontSize = '30px'
         win.style.padding = '200px 0'
         win.style.boxSizing = 'border-box'
-        win.style.width = `${interakt_zadanie.clientWidth}px`
-        win.style.height = `${interakt_zadanie.clientHeight}px`
+        win.style.width = `${task.clientWidth}px`
+        win.style.height = `${task.clientHeight}px`
         win.style.background = 'rgba(0,0,0,0.5)'
         win.style.zIndex = 1000
         audio.play()

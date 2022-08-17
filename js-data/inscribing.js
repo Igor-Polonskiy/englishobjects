@@ -44,7 +44,9 @@
 
     let slide = 0
 
-    drop.addEventListener('click', () => (renderItem(items[0])))
+    drop.addEventListener('click', () => {renderItem(items[0]);
+        slide = 0
+    })
 
     function renderItem(item) {
         task.innerHTML = ''
