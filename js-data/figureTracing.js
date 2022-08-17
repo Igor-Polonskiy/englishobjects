@@ -59,12 +59,12 @@
         cx.fill();
         cx.closePath();
 
-       /* cx.beginPath();
+        cx.beginPath();
         cx.arc(centerX, centerY, 100, 0, 2 * Math.PI, false);
         cx.fillStyle = 'white';
         cx.fill();
         cx.lineWidth = 5;
-        cx.closePath();*/
+        cx.closePath();
 
 
         cx.beginPath();
