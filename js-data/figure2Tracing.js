@@ -1,26 +1,26 @@
 (() => {
 
-    /*все вхождения figure_A... заменить A на нужную букву*/
-    let task = document.querySelector('.figure_wrapper')
+    /*все вхождения figure2_A... заменить A на нужную букву*/
+    let task = document.querySelector('.figure2_wrapper')
     const interakt_zadanie = task.parentElement;
     const headCheck = interakt_zadanie.previousElementSibling;
     const drop = headCheck.querySelector('.drop');
-    const figurePicture = task.querySelector('.figure_picture')
+    const figure2Picture = task.querySelector('.figure2_picture')
 
-    let c = task.querySelector('.figure_A_canvas');
+    let c = task.querySelector('.figure2_A_canvas');
     let cx = c.getContext('2d');
     let mousedown = false;
 
     let pixels = null;
-    let figurepixels = null;
+    let figure2pixels = null;
     /*заменить Aa на нужные буквы*/
-    //let figure = '◻'// △ ◯ ▭ ◻ ◇
+    //let figure2 = '◻'// △ ◯ ▭ ◻ ◇
     /**/
     /*при необходимости подобрать нужный шрифт*/
     //let font = 'Titillium Web'
     //cx.font = `bold 310px ${font}`;
     /**/
-    let isfigureComplete = false
+    let isfigure2Complete = false
     /*заменть цвет закраски буквы на нужный в формате rgb*/
     /*использовать любой кроме 
     (255,255,255)-цвет буквы и
@@ -40,55 +40,45 @@
         //cx.fillStyle = 'rgb(255, 255, 255)';
         //cx.textBaseline = 'middle';
 
-        drawfigure(100, 'rgb(230,230,230)');
+        drawfigure2(70, 'rgb(230,230,230)');
+        
         pixels = cx.getImageData(0, 0, c.width, c.height);
-        figurepixels = getpixelamount(230, 230, 230);
+        figure2pixels = getpixelamount(230, 230, 230);
     }
 
-    function drawfigure(size, color) {
-        let centerX = c.width / 2;
-        let centerY = c.height / 2;
-        /* cx.fillStyle = color;
-         
-         cx.fillText(figure, centerx, centery);
-         drawfigureBorder(figure)*/
-        cx.beginPath();
-        cx.arc(centerX, centerY, size+10, 0, 2 * Math.PI, false);
-        cx.fillStyle = `rgb(${r}, ${g}, ${b + 1})`;
-        cx.fill();
-        cx.closePath();
-
-        cx.beginPath();
-        cx.arc(centerX, centerY, size, 0, 2 * Math.PI, false);
-        cx.fillStyle = color;
-        cx.fill();
-        cx.lineWidth = 5;
-        cx.closePath();
-
-
-        cx.beginPath();
-        cx.arc(centerX, centerY, size-20, 0, 2 * Math.PI, false);
-        cx.fillStyle = `rgb(${r}, ${g}, ${b + 1})`;
-        cx.fill();
-        cx.closePath();
-
-
-        cx.beginPath();
-        cx.arc(centerX, centerY, size-30, 0, 2 * Math.PI, false);
-        cx.fillStyle = 'rgb(255, 255, 255)';
-        cx.fill();
-        cx.closePath();
-
-
+    function drawfigure2(size, color) {
+        strokeStar( size+15, 5, 2,`rgb(${r}, ${g}, ${b+1})` )
+        strokeStar( size, 5, 2,color )
+        strokeStar( size-20, 5, 2,`rgb(${r}, ${g}, ${b+1})` )
+        strokeStar( size-35, 5, 2,`white` )
     };
 
-    function drawfigureBorder(figure) {
-        let centerx = (c.width - cx.measureText(figure).width) / 2;
+    function strokeStar( r, n, inset, color) {
+        let centerX = c.width / 2;
+        let centerY = c.height / 2;
+        cx.save();
+        cx.beginPath();
+        cx.translate(centerX, centerY);
+        cx.moveTo(0,0-r);
+        for (var i = 0; i < n; i++) {
+            cx.rotate(Math.PI / n);
+            cx.lineTo(0, 0 - (r*inset));
+            cx.rotate(Math.PI / n);
+            cx.lineTo(0, 0 - r);
+        }
+        cx.closePath();
+        cx.fillStyle = color;
+        cx.fill();
+        cx.restore();
+    }
+
+    function drawfigure2Border(figure2) {
+        let centerx = (c.width - cx.measureText(figure2).width) / 2;
         let centery = c.height / 2;
         cx.lineWidth = 5;
         cx.lineCap = 'round'
         cx.strokeStyle = 'rgb(240, 100, 0)';
-        cx.strokeText(figure, centerx, centery);
+        cx.strokeText(figure2, centerx, centery);
     };
 
     function showerror(error) {
@@ -115,7 +105,7 @@
             cx.beginPath();
             cx.moveTo(x, y)
 
-            //drawfigureBorder(figure)
+            //drawfigure2Border(figure2)
         }
     };
 
@@ -145,8 +135,8 @@
 
     function pixelthreshold() {
 
-        if (getpixelamount(r, g, b) / figurepixels > 1.3) {
-            if (!isfigureComplete) {
+        if (getpixelamount(r, g, b) / figure2pixels > 1.45) {
+            if (!isfigure2Complete) {
                 pulse()
                 
             }
@@ -154,28 +144,28 @@
     };
 
     function pulse() {
-       let size = 100
+       let size = 70
         let timerId1 = setInterval(() => {
-            size += 2
+            size += 1
             cx.clearRect(0, 0, c.width, c.height)
-            drawfigure(size,`rgb(${r}, ${g}, ${b + 1})`)
+            drawfigure2(size,`rgb(${r}, ${g}, ${b + 1})`)
         }, 40);
 
         setTimeout(() => {
             clearInterval(timerId1);
             let timerId2 = setInterval(() => {
-                size -= 2
+                size -= 1
                 cx.clearRect(0, 0, c.width, c.height)
                 
-                drawfigure(size)
+                drawfigure2(size, `rgb(${r}, ${g}, ${b + 1})`)
 
             }, 40);
             setTimeout(() => {
                 clearInterval(timerId2);
-            }, 1000);
-        }, 1000);
+            }, 800);
+        }, 800);
 
-        isfigureComplete = true
+        isfigure2Complete = true
     }
 
     function onmousedown(ev) {
@@ -201,7 +191,7 @@
     };
 
     function reloadTask() {
-        isfigureComplete = false
+        isfigure2Complete = false
         setupCanvas();
     }
 
