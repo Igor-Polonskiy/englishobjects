@@ -1,0 +1,70 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@700&display=swap');*/
+
+
+
+.figure3_wrapper {
+    margin: 20px;
+    padding: 10px
+}
+
+.figure2_img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.figure2_img>img {
+    max-width: 220px;
+}
+
+.figure2_canvas {
+    display: block;
+    background: rgb(255, 255, 255);
+    cursor: pointer;
+    touch-action: none;
+}
+
+.figure2_checkTask {
+    display: flex;
+    justify-content: center;
+}
+
+.figure2_chek_answer {
+    display: flex;
+    align-items: center;
+    font-size: 26px;
+}
+
+.figure2_chek_answer span {
+    font-size: 25px;
+}
+
+.task1Btn {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: -5px -5px 15px #ffffff, 5px 5px 15px #e9ecf4;
+    border: none;
+    border-radius: 12px;
+    background-color: #0AB7D3;
+    padding: 10px;
+    font-size: 26px;
+    color: white;
+    min-width: 100px;
+}
+
+.task1Btn:hover {
+    box-shadow: -5px -5px 15px #b8b7b7, 5px 5px 15px #99999b;
+}
+
+.figure2_audio {
+    display: none !important;
+}
+
+@media(max-width: 1200px) {
+    .figure2_img {
+        flex-direction: column;
+    }
+    .figure2_img>img {
+        max-width: 180px;
+    }
+}
